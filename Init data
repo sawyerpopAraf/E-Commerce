@@ -1,0 +1,158 @@
+{
+  data: [
+    {
+      brand: 'Apple',
+      category: 'Phones',
+      date_added: '2022-05-01T00:00:00',
+      description: '3D Touch. 12MP photos. 4K video.',
+      id: 1,
+      imgurl: 'http://images.restapi.co.za/products/product-iphone.png',
+      name: 'iPhone 6s Plus 16Gb',
+      price: 649,
+      quantity: 2
+    },
+    {
+      brand: 'Apple',
+      category: 'TVs',
+      date_added: '2020-05-31T00:00:00',
+      description: 'The future of television is here.',
+      id: 2,
+      imgurl: 'http://images.restapi.co.za/products/product-apple-tv.png',
+      name: 'Apple TV 2016',
+      price: 599,
+      quantity: 10
+    },
+    {
+      brand: 'Apple',
+      category: 'Phones',
+      date_added: '2021-09-15T00:00:00',
+      description: 'A big step for small',
+      id: 3,
+      imgurl: 'http://images.restapi.co.za/products/product-iphone-se.png',
+      name: 'iPhone SE 32/64Gb',
+      price: 499,
+      quantity: 15
+    },
+    {
+      brand: 'Apple',
+      category: 'Watches',
+      date_added: '2021-01-12T00:00:00',
+      description: 'You. At a glance',
+      id: 4,
+      imgurl: 'http://images.restapi.co.za/products/product-apple-watch.png',
+      name: 'Apple Watch Sport Edition',
+      price: 399,
+      quantity: 1
+    },
+    {
+      brand: 'Apple',
+      category: 'Desktops',
+      date_added: '2023-01-16T00:00:00',
+      description: 'Retina. Now in colossal and ginormous',
+      id: 5,
+      imgurl: 'http://images.restapi.co.za/products/product-imac.png',
+      name: '21.5-inch iMac with Retina Display',
+      price: 599,
+      quantity: 20
+    },
+    {
+      brand: 'Apple',
+      category: 'Laptops',
+      date_added: '2023-04-02T00:00:00',
+      description: 'Stunning Retina Display',
+      id: 6,
+      imgurl: 'http://images.restapi.co.za/products/product-macbook-pro.png',
+      name: 'MacBook Pro with Retina Display',
+      price: 99,
+      quantity: 18
+    },
+    {
+      brand: 'Apple',
+      category: 'Tablets',
+      date_added: '2022-11-22T00:00:00',
+      description: '3D Touch. 12MP photos. 4K video.',
+      id: 7,
+      imgurl: 'http://images.restapi.co.za/products/product-ipad-pro.png',
+      name: '9.7-inch iPad Pro 32Gb',
+      price: 99,
+      quantity: 18
+    },
+    {
+      brand: 'Apple',
+      category: 'Desktops',
+      date_added: '2023-03-01T00:00:00',
+      description: 'Better for creativity on an epic scale',
+      id: 8,
+      imgurl: 'http://images.restapi.co.za/products/product-mac-pro.png',
+      name: 'Mac Pro Quad-Core and Dual Core GPU',
+      price: 2999,
+      quantity: 27
+    },
+    {
+      brand: 'Apple',
+      category: 'Tablets',
+      date_added: '2023-03-01T00:00:00',
+      description: 'Light. Heavyweight',
+      id: 9,
+      imgurl: 'http://images.restapi.co.za/products/product-ipad-air.png',
+      name: 'iPad Air 2 32/64Gb',
+      price: 399,
+      quantity: 55
+    },
+    {
+      brand: 'Samsung',
+      category: 'Phones',
+      date_added: '2022-11-27T00:00:00',
+      description: 'Dual Sim card - Lavender color',
+      id: 10,
+      imgurl: 'http://images.restapi.co.za/products/product-samsung-s21-FE.png',
+      name: 'Samsung Galaxy S21 FE 5G 128GB',
+      price: 398,
+      quantity: 15
+    },
+    {
+      brand: 'Samsung',
+      category: 'Phones',
+      date_added: '2023-04-09T00:00:00',
+      description: 'Dual Sim card - Black color',
+      id: 11,
+      imgurl: 'http://images.restapi.co.za/products/product-samsung-A24.png',
+      name: 'Samsung Galaxy A24 128GB LTE',
+      price: 398,
+      quantity: 15
+    },
+    {
+      brand: 'Xiaomi',
+      category: 'TVs',
+      date_added: '2023-05-31T00:00:00',
+      description: '360 Bluetooth & IR remote control | Fast and powerful quad-core processor | Google TV, Google Assistant and Chromecast built-in',
+      id: 12,
+      imgurl: 'http://images.restapi.co.za/products/product-xiaomi-4k-tv.png',
+      name: 'Xiaomi 4K Ultra HD TV Box S Media Player (2nd Gen)',
+      price: 49,
+      quantity: 38
+    },
+    {
+      brand: 'MXQ',
+      category: 'TVs',
+      date_added: '2023-05-17T00:00:00',
+      description: 'Bluetooth & IR remote control',
+      id: 13,
+      imgurl: 'http://images.restapi.co.za/products/product-mxq-tv.png',
+      name: 'Android 10.1 MXQ Pro 4K 5G 4K HDR Ultra-HD TV Box',
+      price: 49,
+      quantity: 14
+    },
+    {
+      brand: 'Samsung',
+      category: 'Tablets',
+      date_added: '2023-05-03T00:00:00',
+      description: 'Android table - perfect for kids',
+      id: 14,
+      imgurl: 'http://images.restapi.co.za/products/product-samsung-tab-A7.png',
+      name: 'Samsung Galaxy Tab A7 Lite (T220) 8.7-inch 16GB Wi-Fi Tablet',
+      price: 20,
+      quantity: 8
+    }
+  ]
+}

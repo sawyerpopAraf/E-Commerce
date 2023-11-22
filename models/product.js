@@ -28,10 +28,10 @@ module.exports = (sequelize, Sequelize) => {
         }
     );
     Product.associate = function (models) {
-        Product.belongsTo(models.Category, { foreignKey: { allowNull: false } });
-        Product.belongsTo(models.Brand, { foreignKey: { allowNull: false } });
-        Product.belongsToMany(models.Order, { through: orderId, foreignKey: { allowNull: false } });
-        Product.hasMany(models.CartItems, { foreignKey: { allowNull: false } });
+        Product.belongsTo(models.Category, { foreignKey: { name:'categoryId',allowNull: false } });
+        Product.belongsTo(models.Brand, { foreignKey: { name:'brandId', allowNull: false } });
+        Product.belongsToMany(models.Order, { through: 'OrderDetails',foreignKey:'productId' });
+        Product.hasMany(models.CartItems, { foreignKey: {allowNull: false } });
     };
     return Product;
 };

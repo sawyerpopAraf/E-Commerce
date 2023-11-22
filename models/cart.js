@@ -12,9 +12,10 @@ module.exports = (sequelize, Sequelize) => {
 		}
 	);
 	Cart.associate = function (models) {
-        Cart,hasMany(models.CartItems,{foreignkey:{allowNull:false}})
-        Cart.hasOne(models.order,{foreignKey:{allowNull:true}})
-		Cart.belongsToMany(models.Product, { through:ProductId,foreignKey:{allowNull:false} });
+        Cart.hasMany(models.CartItems,{foreignKey:{allowNull:false}})
+        Cart.hasOne(models.Order,{foreignKey:{allowNull:true}})
+		Cart.belongsTo(models.User,{foreignKey:{allowNull:false}})
+
 		
 	};
 	return Cart;

@@ -46,7 +46,12 @@ module.exports = (sequelize, Sequelize) => {
             memberShip:{
                 type:Sequelize.DataTypes.ENUM('Bronze', 'Silver', 'Gold'),
                 allowNull:false
-            }
+            },
+			totalPurchased:{
+				type:Sequelize.DataTypes.INTEGER,
+				allowNull:false,
+				defaultValue:0
+			}
 		},
 		{
 			timestamps: false,

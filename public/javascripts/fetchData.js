@@ -1,4 +1,12 @@
-fetch('http://backend.restapi.co.za/items/products')
-.then(res=>res.json())
-.then(data=>console.log(data))
-.catch(err=>console.log(err))
+function initData() {
+    fetch('http://backend.restapi.co.za/items/products')
+        .then(res => res.json())
+        .then(data => {
+            const brandNames = data.map(product => product.brand);
+            console.log(brandNames);
+            return brandNames; // If you need to use brandNames later in the chain.
+        })
+        .catch(err => console.log(err));
+}
+
+initData(

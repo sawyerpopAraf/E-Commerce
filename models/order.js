@@ -1,6 +1,6 @@
 	module.exports = (sequelize, Sequelize) => {
 	const Order = sequelize.define(
-		'order',
+		'Order',
 		{
 			status: {
                 type:Sequelize.DataTypes.ENUM('In Progress', 'Ordered', 'Completed'),
@@ -22,13 +22,13 @@
 		}
 	);
 	Order.associate = function (models) {
-		Order.belongsToMany(models.Product, { through:productId });
+		Order.belongsToMany(models.Product, { through:'OrderDetails',foreignKey:'orderId'});
         Order.belongsTo(models.User,{foreignKey:{allowNull:false}})
-		Order.belongsTo(models.CartItems,{foreignKey:{allowNull:false}})
+		Order.belongsTo(models.Cart,{foreignKey:{allowNull:false}})
 	};
 
-	Order.beforeCreate((order, options) => {
-        order.orderNumber = randomNumber(8);
+	Order.beforeCreate((Order, options) => {
+        Order.orderNumber = randomNumber(8);
     });
 	return Order;
 };

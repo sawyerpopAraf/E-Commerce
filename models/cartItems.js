@@ -8,13 +8,10 @@ module.exports = (sequelize, Sequelize) => {
 				allowNull: false,
 			},
             unitPrice:{
-                type:sequelize.DataTypes.DECIMAL,
+                type:Sequelize.DataTypes.DECIMAL,
                 allowNull:false
             },
-			checkedOut:{
-				type:Sequelize.DataTypes.BOOLEAN,
-				allowNull:false
-			},
+			
 			deleted:{
 				type:Sequelize.DataTypes.BOOLEAN,
                 allowNull:true
@@ -26,8 +23,8 @@ module.exports = (sequelize, Sequelize) => {
 	);
 	CartItems.associate = function (models) {
 		CartItems.belongsTo(models.Product, {foreignKey:{allowNull:false} });
-        CartItems.belongsTo(models.User,{foreignKey:{allowNull:false}})
-		CartItems.hasOne(models.order,{foreignKey:{allowNull:true}})
+		CartItems.belongsTo(models.Cart, {foreignKey:{allowNull:false} });
+
 	};
 	return CartItems;
 };

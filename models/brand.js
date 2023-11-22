@@ -1,5 +1,5 @@
 module.exports = (sequelize, Sequelize) => {
-	const brand = sequelize.define(
+	const Brand = sequelize.define(
 		'Brand',
 		{
 			name: {
@@ -12,8 +12,8 @@ module.exports = (sequelize, Sequelize) => {
 			timestamps: false,
 		}
 	);
-	brand.associate = function (models) {
-		brand.hasMany(models.product, { foreignKey: { allowNull: false } });
+	Brand.associate = function (models) {
+		Brand.hasMany(models.Product, { foreignKey: { name:'brandId',allowNull: false } });
 	};
-	return brand;
+	return Brand;
 };
