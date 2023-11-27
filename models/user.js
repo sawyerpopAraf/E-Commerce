@@ -45,14 +45,20 @@ module.exports = (sequelize, Sequelize) => {
 			},
             memberShip:{
                 type:Sequelize.DataTypes.ENUM('Bronze', 'Silver', 'Gold'),
-                allowNull:false
+                allowNull:true,
+				
             },
 			totalPurchased:{
 				type:Sequelize.DataTypes.INTEGER,
 				allowNull:false,
 				defaultValue:0
-			}
-		},
+			},
+			role:{
+			type:Sequelize.DataTypes.ENUM('Admin','User'),
+			allowNull:false,
+			defaultValue:'User'
+		}},
+		
 		{
 			timestamps: false,
 		}
