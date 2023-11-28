@@ -2,7 +2,7 @@ class BrandService{
     constructor(db){
         this.sequelize=db.sequelize
         this.brand=db.Brand
-        this.userser=db.User
+        this.user=db.User
         this.product=db.Product
     }
     async createBrand(brandName) {

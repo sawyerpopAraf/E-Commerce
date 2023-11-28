@@ -2,7 +2,7 @@ class CategoryService{
     constructor(db){
         this.sequelize=db.sequelize
         this.category=db.Category
-        this.userser=db.User
+        this.user=db.User
         this.product=db.Product
     }
     async createCategory(categoryName) {
