@@ -12,6 +12,8 @@ var indexRouter = require('./routes/index');
 var usersRouter = require('./routes/users');
 var initRouter=require('./routes/initData')
 var authRouter=require('./routes/auth')
+var categoryRouter=require('./routes/category')
+var brandRouter=require('./routes/brand')
 
 var app = express();
 
@@ -31,6 +33,10 @@ app.use('/', indexRouter);
 app.use('/users', usersRouter);
 app.use('/init', initRouter);
 app.use('/', authRouter);
+app.use('/category', categoryRouter);
+app.use('/brand', brandRouter);
+
+
 
 
 

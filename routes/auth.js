@@ -48,7 +48,8 @@ router.post('/login', jsonParser, emailFormat, async (req, res, next) => {
                     {
                         id: data.id,
                         email: data.email,
-                        username: data.userName
+                        username: data.userName,
+                        role:data.role
                     },
                     process.env.TOKEN_SECRET, 
                     { expiresIn: "5h" }
@@ -62,7 +63,8 @@ router.post('/login', jsonParser, emailFormat, async (req, res, next) => {
                 id: data.id,
                 email: data.email,
                 username: data.userName,
-                token: token
+                token: token,
+                role:data.role
             });
         });
     } catch (error) {
