@@ -11,6 +11,7 @@ var jsonParser=bodyParser.json()
 
 router.use(jsend.middleware)
 
+//add brand ,category check 
 router.post('/', jsonParser, isAuthAdmin, async (req, res, next) => {
     const { name,price,description,imageUrl,quantity,brandId,categoryId } = req.body;
     if (name==null&&price==null&&description==null&&imageUrl==null&&quantity==null&&brandId==null&&categoryId==null) {
@@ -46,21 +47,32 @@ router.delete('/:id',isAuthAdmin,async(req,res,next)=>{
     }
 })
 
-router.post('/update/:id',isAuthAdmin, async function (req,res){
+router.post('/update/:id',jsonParser,isAuthAdmin, async function (req,res){
     const {id}=req.params
 
     const { name,price,description,imageUrl,quantity,brandId,categoryId } = req.body;    
-    if(newcategory==null){
+    if(name==null&&price==null&&description==null&&imageUrl==null&&quantity==null&&brandId==null&&categoryId==null){
         return res.jsend.fail({result:"new category name needed"})
     }
     try{
-        const data= await categoryService.updateCategory(req.params.id,newcategory);
+        const data= await productService.updateProduct(name,price,description,imageUrl,quantity,brandId,categoryId,id);
         return res.jsend.success({result:data})    
     } catch(error){
         res.jsend.error({message: error.message})
     }
 })
 
+router.post('/search',jsonParser,async (req,res,next)=>{
+    const {name} =req.body
+    try{
+        const data=await productService.search(name)
+        return res.jsend.success({result:data})
+    }
+    catch(error){
+        throw new Error(error)
+    }
+
+})
 
 
 module.exports=router

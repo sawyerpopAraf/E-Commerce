@@ -7,7 +7,24 @@ class ProductService{
         this.category=db.Category
     }
     async getProducts(){
-        return await this.product.findAll()
+       const query=`SELECT 
+       Products.name,Products.price,Products.description,Products.imageUrl,Products.quantity,  
+       Categories.name AS categoryName, 
+       Brands.name AS brandName
+   FROM 
+       products
+   JOIN 
+       Categories ON products.categoryId = categories.id
+   JOIN 
+       Brands ON products.brandId = brands.id;`
+
+       try{
+        const[results,metadata]=await this.sequelize.query(query)
+        console.log(results)
+        return results
+       }catch(error){
+         throw new Error (error)
+       }
     }
 
     async addProduct(name,price,description,imageUrl,quantity,brandId,categoryId){
@@ -33,13 +50,13 @@ class ProductService{
     async updateProduct(name,price,description,imageUrl,quantity,brandId,categoryId,id){
         const existingProduct=await this.product.findOne({
             where:{
-                name:name
+                id:id
             }
         })
-        if(existingProduct==null){
+        if(!existingProduct){
             throw new Error("Product not exists")
         }
-        return await this.product.create({
+        return await this.product.update({
             name:name,
             price:price,
             description:description,
@@ -68,10 +85,27 @@ class ProductService{
             })
         }
 
+    async search(name){
+         const query=`SELECT 
+         Products.name,Products.price,Products.description,Products.imageUrl,Products.quantity,  
+         Categories.name AS categoryName, 
+         Brands.name AS brandName
+     FROM 
+         products
+     JOIN 
+         Categories ON Products.categoryId = categories.id
+     JOIN 
+         Brands ON Products.brandId = brands.id
+     WHERE 
+         Products.name LIKE '%${name}%'         
+         `
+        const[results,metadata]=await this.sequelize.query(query)
+        return results
+    }
     
 
 
 
 }
 
-module.exports=BrandService
+module.exports=ProductService

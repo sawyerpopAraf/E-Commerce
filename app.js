@@ -14,6 +14,8 @@ var initRouter=require('./routes/initData')
 var authRouter=require('./routes/auth')
 var categoryRouter=require('./routes/category')
 var brandRouter=require('./routes/brand')
+var productRouter=require('./routes/product')
+
 
 var app = express();
 
@@ -35,6 +37,7 @@ app.use('/init', initRouter);
 app.use('/', authRouter);
 app.use('/category', categoryRouter);
 app.use('/brand', brandRouter);
+app.use('/product', productRouter);
 
 
 

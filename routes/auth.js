@@ -52,7 +52,7 @@ router.post('/login', jsonParser, emailFormat, async (req, res, next) => {
                         role:data.role
                     },
                     process.env.TOKEN_SECRET, 
-                    { expiresIn: "5h" }
+                    { expiresIn: "2h" }
                 );
             } catch (err) {
                 return res.jsend.error("Something went wrong with creating JWT token");

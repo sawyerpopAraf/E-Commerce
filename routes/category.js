@@ -46,7 +46,7 @@ router.delete('/:id',isAuthAdmin,async(req,res,next)=>{
     }
 })
 
-router.post('/update/:id',isAuthAdmin, async function (req,res){
+router.post('/update/:id',jsonParser,isAuthAdmin, async function (req,res){
     const{newcategory}=req.body
     if(newcategory==null){
         return res.jsend.fail({result:"new category name needed"})
