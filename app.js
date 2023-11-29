@@ -16,6 +16,7 @@ var categoryRouter=require('./routes/category')
 var brandRouter=require('./routes/brand')
 var productRouter=require('./routes/product')
 var searchRouter=require('./routes/search')
+var adminRouter=require('./routes/admin')
 
 
 var app = express();
@@ -40,6 +41,8 @@ app.use('/category', categoryRouter);
 app.use('/brand', brandRouter);
 app.use('/product', productRouter);
 app.use('/search', searchRouter);
+app.use('/admin', adminRouter);
+
 
 
 
