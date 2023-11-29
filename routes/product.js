@@ -37,7 +37,7 @@ router.get('/',async(req,res,next)=>{
         }
 })
 
-router.delete('/:id',isAuthAdmin,async(req,res,next)=>{
+router.delete('/delete/:id',isAuthAdmin,async(req,res,next)=>{
     const {id}=req.params
     try{
         const data=await productService.deleteProduct(id)
@@ -62,17 +62,7 @@ router.post('/update/:id',jsonParser,isAuthAdmin, async function (req,res){
     }
 })
 
-router.post('/search',jsonParser,async (req,res,next)=>{
-    const {name} =req.body
-    try{
-        const data=await productService.search(name)
-        return res.jsend.success({result:data})
-    }
-    catch(error){
-        throw new Error(error)
-    }
 
-})
 
 
 module.exports=router

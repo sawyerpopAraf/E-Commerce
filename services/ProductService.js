@@ -28,6 +28,18 @@ class ProductService{
     }
 
     async addProduct(name,price,description,imageUrl,quantity,brandId,categoryId){
+        const productBrandId=await this.brand.findOne({
+            where:{id:brandId}
+        })
+        if(productBrandId==null){
+            throw new Error("Brand does not exist, create a brand first")
+        }
+        const productCategoryId=await this.category.findOne({
+            where:{id:categoryId}
+        })
+        if(productCategoryId==null){
+            throw new Error("Category does not exist, create a category first")
+        }
         const existingProduct=await this.product.findOne({
             where:{
                 name:name
@@ -55,6 +67,18 @@ class ProductService{
         })
         if(!existingProduct){
             throw new Error("Product not exists")
+        }
+        const productBrandId=await this.brand.findOne({
+            where:{id:brandId}
+        })
+        if(productBrandId==null){
+            throw new Error("Brand does not exist, create a brand first")
+        }
+        const productCategoryId=await this.category.findOne({
+            where:{id:categoryId}
+        })
+        if(productCategoryId==null){
+            throw new Error("Category does not exist, create a category first")
         }
         return await this.product.update({
             name:name,
