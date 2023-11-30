@@ -29,6 +29,7 @@ router.post('/login', jsonParser, emailFormat, async (req, res, next) => {
         if (!data) {
             return res.jsend.fail({ result: "User or email not found" });
         }
+        console.log(data)
 
         crypto.pbkdf2(password, data.salt, 310000, 32, "sha256", function (err, hashedPassword) {
             if (err) {
@@ -50,7 +51,7 @@ router.post('/login', jsonParser, emailFormat, async (req, res, next) => {
                         email: data.email,
                         username: data.userName,
                         role:data.role
-                    },
+                        },
                     process.env.TOKEN_SECRET, 
                     { expiresIn: "2h" }
                 );

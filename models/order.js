@@ -14,6 +14,9 @@
 			orderNumber:{
 				type:Sequelize.DataTypes.STRING,
 				allowNull:false
+			},
+			totalPrice:{
+				type:Sequelize.DataTypes.DECIMAL(10,2)
 			}
            
 		},

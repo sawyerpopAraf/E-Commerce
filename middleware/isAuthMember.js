@@ -14,6 +14,10 @@ function isAuthMember(req, res, next) {
     try {
         const decodedToken = jwt.verify(token, process.env.TOKEN_SECRET);
         req.userData = decodedToken;  
+        if(req.userData.role!=='User'){
+            return res.jsend.fail({result:"Please register as a user first"})
+        
+        }
         
     } catch (err) {
         return res.jsend.fail({statusCode:401,"result": err.message});  
