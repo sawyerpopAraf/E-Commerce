@@ -1,37 +1,36 @@
-module.exports = (sequelize, Sequelize) => {
-    const Product = sequelize.define(
-        'Product',
-        {
-            name: {
-                type: Sequelize.DataTypes.STRING,
-                allowNull: false,
-            },
-            price: {
-                type: Sequelize.DataTypes.DECIMAL,
-                allowNull: false,
-            },
-            description: {
-                type: Sequelize.DataTypes.STRING,
-                allowNull: false,
-            },
-            imageUrl: {
-                type: Sequelize.DataTypes.STRING,
-                allowNull: false,
-            },
-            quantity: {
-                type: Sequelize.DataTypes.INTEGER,
-                allowNull: false,
-            }
+module.exports = (sequelize, DataTypes) => {
+    const Product = sequelize.define('Product', {
+        name: {
+            type: DataTypes.STRING,
+            allowNull: false,
         },
-        {
-            timestamps: false,
+        price: {
+            type: DataTypes.DECIMAL,
+            allowNull: false,
+        },
+        description: {
+            type: DataTypes.STRING,
+            allowNull: false,
+        },
+        imageUrl: {
+            type: DataTypes.STRING,
+            allowNull: false,
+        },
+        quantity: {
+            type: DataTypes.INTEGER,
+            allowNull: false,
         }
-    );
-    Product.associate = function (models) {
-        Product.belongsTo(models.Category, { foreignKey: { name:'categoryId',allowNull: false } });
-        Product.belongsTo(models.Brand, { foreignKey: { name:'brandId', allowNull: false } });
-        Product.belongsToMany(models.Order, { through: 'OrderDetails',foreignKey:'productId' });
-        Product.hasMany(models.CartItems, { foreignKey: {allowNull: false } });
+    }, {
+        timestamps: false,
+    });
+
+    Product.associate = function(models) {
+        Product.belongsTo(models.Category, { foreignKey: 'categoryId' });
+        Product.belongsTo(models.Brand, { foreignKey: 'brandId' });
+        Product.hasMany(models.CartItems);
+        Product.belongsToMany(models.Order, { through: models.OrderDetails, foreignKey: 'productId' });
     };
+
     return Product;
 };
+

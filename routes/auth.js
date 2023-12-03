@@ -78,20 +78,20 @@ router.post("/signup",jsonParser,emailFormat, async (req, res, next) => {
 	if (firstname == null&&lastname==null ) {
 	  return res.jsend.fail({ name: "Name is required." });
 	}
-	if (email == null) {
+	if (!email) {
 	  return res.jsend.fail({ email: "Email is required." });
 	}
-	if (password == null) {
+	if (!password) {
 	  return res.jsend.fail({ password: "Password is required." });
 	}
-    if(username==null){
-        return res.jsend.fail({ password: "Username is required." });
+    if(!username){
+        return res.jsend.fail({ username: "Username is required." });
     }
-    if(address==null){
-        return res.jsend.fail({ password: "Address is required." });
+    if(!address){
+        return res.jsend.fail({ address: "Address is required." });
     }
-    if(tlfnumber==null){
-        return res.jsend.fail({ password: "Telephone number is required." });
+    if(!tlfnumber){
+        return res.jsend.fail({ tlfnumber: "Telephone number is required." });
     }
 	
 	 try {

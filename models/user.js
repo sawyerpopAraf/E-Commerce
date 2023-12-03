@@ -64,8 +64,8 @@ module.exports = (sequelize, Sequelize) => {
 		}
 	);
 	User.associate = function (models) {
-		User.hasMany(models.Order, { foreignKey: { allowNull: false } })
-		User.hasMany(models.Cart, { foreignKey: { allowNull: false } })
+		User.hasMany(models.Order)
+		User.hasMany(models.Cart)
     
         }
 	

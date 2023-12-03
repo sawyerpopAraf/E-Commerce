@@ -1,27 +1,25 @@
-module.exports = (sequelize, Sequelize) => {
-	const Cart = sequelize.define(
-		'Cart',
-		{
-			checkedOut:{
-				type:Sequelize.DataTypes.BOOLEAN,
-				allowNull:false
-			},
-			totalPrice:{
-				type:Sequelize.DataTypes.DECIMAL(10,2),
-				allowNull:false,
-				defaultValue:0.00
-    }
-		},
-		{
-			timestamps: true,
-		}
-	);
-	Cart.associate = function (models) {
-        Cart.hasMany(models.CartItems,{foreignKey:{allowNull:false}})
-        Cart.hasOne(models.Order,{foreignKey:{allowNull:true}})
-		Cart.belongsTo(models.User,{foreignKey:{allowNull:false}})
+module.exports = (sequelize, DataTypes) => {
+    const Cart = sequelize.define('Cart', {
+        checkedOut: {
+            type: DataTypes.BOOLEAN,
+            allowNull: false,
+            defaultValue: false,
+        },
+        totalPrice: {
+            type: DataTypes.DECIMAL(10, 2),
+            allowNull: false,
+            defaultValue: 0.00,
+        }
+    }, {
+        timestamps: true,
+    });
 
-		
-	};
-	return Cart;
+    Cart.associate = function(models) {
+        Cart.hasMany(models.CartItems);
+        Cart.hasOne(models.Order);
+        Cart.belongsTo(models.User);
+    };
+
+    return Cart;
 };
+
