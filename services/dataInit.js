@@ -67,27 +67,28 @@ class initData {
         }
 
         //insert Admin
-        var {password}=req.body
-        var salt=crypto.randomBytes(16)
-        crypto.pbkdf2(
-            password,
-            salt,
-            310000,
-            32,
-            "sha256",
-            function (err,hashedPassword){
-                if(err){
-                    return next(err)
-                }
-               
-            db.sequelize.query(`
-                INSERT INTO Users(id,firstName,lastName,userName,email,encryptedPassword,salt,address,tlfNumber,totalPurchased,role) 
-                VALUES 
-                (1, 'Admin', 'Support', 'Admin', 'admin@noroff.no', '${hashedPassword}','${salt}', 'Online', 911,0,'Admin')   
-                `)
-
+        var { password } = req.body;
+        var salt = crypto.randomBytes(16);
+        crypto.pbkdf2(password, salt, 310000, 32, "sha256", async function (err, hashedPassword) {
+            if (err) {
+                return next(err);
             }
-           )
+        
+            try {
+                const insertQuery = `
+                    INSERT INTO Users (id, firstName, lastName, userName, email, encryptedPassword, salt, address, tlfNumber, totalPurchased, role) 
+                    VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)
+                `;
+        
+                await db.sequelize.query(insertQuery, {
+                    replacements: [1, 'Admin', 'Support', 'Admin', 'admin@noroff.no', hashedPassword, salt, 'Online', 911, 0, 'Admin'],
+                    type: db.sequelize.QueryTypes.INSERT
+                });
+            } catch (insertErr) {
+                return next(insertErr);
+            }
+        });
+        
         }
 }
 

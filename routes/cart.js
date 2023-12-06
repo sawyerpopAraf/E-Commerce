@@ -12,7 +12,7 @@ var bodyParser=require('body-parser')
 var jsonParser=bodyParser.json()
 router.use(jsend.middleware)
 
-router.post('/checkout/:cartId', jsonParser, isAuthMember, async (req, res, next) => {
+router.post('/checkout/:cartId', jsonParser, isAuthMember, async(req,res,next) => {
     const cartId = parseInt(req.params.cartId);
     const userId= req.userData.id
     console.log(cartId,userId)

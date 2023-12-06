@@ -19,6 +19,7 @@ var searchRouter=require('./routes/search')
 var adminRouter=require('./routes/admin')
 var cartItems=require('./routes/cartItems')
 var cartRouter=require('./routes/cart')
+var orderRouter=require('./routes/order')
 
 
 var app = express();
@@ -46,6 +47,8 @@ app.use('/search', searchRouter);
 app.use('/admin', adminRouter);
 app.use('/item', cartItems);
 app.use('/cart', cartRouter);
+app.use('/order', orderRouter);
+
 
 
 // catch 404 and forward to error handler

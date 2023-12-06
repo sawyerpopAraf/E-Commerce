@@ -10,7 +10,7 @@ class CartService{
     }
     async checkout(cartId,userId) {
       const transaction = await this.sequelize.transaction();
-      console.log("Checkout Service - UserID:", userId, "CartID:", cartId);
+      console.log("UserID:", userId, "CartID:", cartId);
 
       try {
           let currentCart = await this.cart.findOne({
@@ -69,7 +69,7 @@ class CartService{
           let TotalBoughtThisCart = cartItems.reduce((total, item) => total + item.quantity, 0);
           currentUser.totalPurchased += TotalBoughtThisCart;
   
-          if (currentUser.totalPurchased > 15 && currentUser.totalPurchased < 30) {
+          if (currentUser.totalPurchased >=15 && currentUser.totalPurchased<=30) {
               currentUser.memberShip = 'Silver';
           } else if (currentUser.totalPurchased > 30) {
               currentUser.memberShip = 'Gold';
@@ -81,7 +81,7 @@ class CartService{
           for (const cartItem of cartItems) {
               let detail = await this.OrderDetails.create({
                   OrderId: currentOrder.id, 
-                  productId: cartItem.ProductId,
+                  ProductId: cartItem.ProductId,
                   Quantity: cartItem.quantity,
               }, { transaction });
               orderDetails.push(detail);

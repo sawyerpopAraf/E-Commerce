@@ -39,6 +39,16 @@ class UserService{
             role:'User'
       })
     }
+
+    async changeUserRole(userid,newRole){
+        const user=await this.user.findOne({where:{id:userid}})
+        if(!user){
+            throw new Error("Userid wrong")
+        }
+        user.role=newRole
+        await user.save()
+        return user 
+    }
    
 
 

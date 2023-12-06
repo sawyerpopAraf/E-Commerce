@@ -11,7 +11,7 @@ var bodyParser=require('body-parser')
 var jsonParser=bodyParser.json()
 router.use(jsend.middleware)
 
-router.post('/add', jsonParser, isAuthMember, async (req, res, next) => {
+router.post('/add', jsonParser, isAuthMember, async(req,res,next) => {
     const { productId,quantity} = req.body;
     const userId= req.userData.id
     if (!productId&&!quantity) {
@@ -23,6 +23,23 @@ router.post('/add', jsonParser, isAuthMember, async (req, res, next) => {
             return res.jsend.fail({ result: "No data returned"});
         }
         res.jsend.success((data));
+    } catch (error) {
+        res.jsend.error({message: error.message})
+    }
+});
+
+router.delete('/delete/:itemsId', jsonParser, isAuthMember, async(req,res,next) => {
+    const {cartId} = req.body;
+    const userId= req.userData.id
+    const itemsId=parseInt(req.params.itemsId)
+    console.log(cartId,itemsId)
+    if (!cartId) {
+        return res.jsend.fail({ result: "cartId needed" });
+    }
+    try {
+        await cartItemService.deleteItem(cartId,itemsId,userId);
+        
+        res.jsend.success({ result: "You have successfully deleted the item" });
     } catch (error) {
         res.jsend.error({message: error.message})
     }

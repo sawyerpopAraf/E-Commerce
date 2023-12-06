@@ -9,6 +9,12 @@ var CategoryService=require('../services/CategoryService')
 var categoryService=new CategoryService(db)
 var ProductService=require('../services/ProductService')
 var productService=new ProductService(db)
+var OrderService=require('../services/OrderService')
+var orderService=new OrderService(db)
+var UserService=require('../services/UserService')
+var userService=new UserService(db)
+
+
 var bodyParser=require('body-parser')
 
 var jsonParser=bodyParser.json()
@@ -30,7 +36,7 @@ router.post('/addbrand', jsonParser, isAuthAdmin, async (req, res, next) => {
     }
 });
 
-router.post('/updatebrand/:id',isAuthAdmin, async function (req,res){
+router.post('/updatebrand/:id',isAuthAdmin, async(req,res,next)=>{
     const{newbrand}=req.body
     if(newbrand==null){
         return res.jsend.fail({result:"newbrand name needed"})
@@ -53,7 +59,7 @@ router.delete('/deletebrand/:id',isAuthAdmin,async(req,res,next)=>{
     }
 })
 
-router.post('/addcategory', jsonParser, isAuthAdmin, async (req, res, next) => {
+router.post('/addcategory', jsonParser, isAuthAdmin, async(req,res,next) => {
     const { categoryname } = req.body;
     if (!categoryname) {
         return res.jsend.fail({ result: "Category name needed" });
@@ -69,7 +75,7 @@ router.post('/addcategory', jsonParser, isAuthAdmin, async (req, res, next) => {
     }
 });
 
-router.post('updatecategory/:id',jsonParser,isAuthAdmin, async function (req,res){
+router.post('updatecategory/:id',jsonParser,isAuthAdmin, async(req,res,next)=>{
     const{newcategory}=req.body
     if(newcategory==null){
         return res.jsend.fail({result:"new category name needed"})
@@ -92,7 +98,7 @@ router.delete('/category/:id',isAuthAdmin,async(req,res,next)=>{
     }
 })
 
-router.post('/addproduct', jsonParser, isAuthAdmin, async (req, res, next) => {
+router.post('/addproduct', jsonParser, isAuthAdmin, async(req,res,next) => {
     const { name,price,description,imageUrl,quantity,brandId,categoryId } = req.body;
     if (name==null&&price==null&&description==null&&imageUrl==null&&quantity==null&&brandId==null&&categoryId==null) {
         return res.jsend.fail({ result: "please fill all the required fields" });
@@ -108,7 +114,7 @@ router.post('/addproduct', jsonParser, isAuthAdmin, async (req, res, next) => {
     }
 });
 
-router.post('/updateproduct/:id',jsonParser,isAuthAdmin, async function (req,res){
+router.post('/updateproduct/:id',jsonParser,isAuthAdmin, async(req,res,next)=>{
     const {id}=req.params
 
     const { name,price,description,imageUrl,quantity,brandId,categoryId } = req.body;    
@@ -131,6 +137,38 @@ router.delete('/deleteproduct/:id',isAuthAdmin,async(req,res,next)=>{
     }catch(error){
         res.jsend.error({message: error.message})
     }
+})
+
+router.get('/orders',isAuthAdmin,async(req,res,next)=>{
+    try{
+        const data=await orderService.orderDetailsAdmin()
+        return res.jsend.success({result:data})
+    }catch(error){
+        res.jsend.error({message: error.message})
+    }
+})
+
+router.post('/orderStatus/:id',jsonParser,isAuthAdmin,async(req,res,next)=>{
+     const id=parseInt(req.params.id)
+     const {newStatus}=req.body
+    try{
+        const data=await orderService.orderStatus(id,newStatus)
+        return res.jsend.success({result:data})
+    }catch(error){
+        res.jsend.error({message: error.message})
+    }
+})
+
+router.put('/role/:id',jsonParser,isAuthAdmin,async(req,res,next)=>{
+    const id=parseInt(req.params.id)
+    const {newRole}=req.body
+   
+   try{
+       const data=await userService.changeUserRole(id,newRole)
+       return res.jsend.success({result:data})
+   }catch(error){
+       res.jsend.error({message: error.message})
+   }
 })
 
 module.exports=router

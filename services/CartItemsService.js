@@ -24,7 +24,8 @@ class CartItemsService{
         }
     }
     
-        
+      
+    // i tried to add transaction to this function , but the allCartItems will return undefined. 
     async createItems(productId, quantity, userId) {
         
         let choosedProduct = await this.product.findOne({ where: { id: productId } });
@@ -71,6 +72,50 @@ class CartItemsService{
     
         return {cartItem,calculateTotalPrice};
     }
+    
+    async deleteItem(cartid, itemsid,userid) {
+        const transaction = await this.sequelize.transaction();
+    
+        try {
+            const cart = await this.cart.findOne({ where: { id: cartid } }, { transaction });
+            console.log(cart.UserId)
+            if(cart.UserId!==userid){
+                throw new Error("This cart does not belong to you ")
+            }
+    
+            if (!cart) {
+                throw new Error('Cart not found');
+            }
+    
+            if (cart.checkedOut) {
+                //soft delete
+                const itemDetails = await this.cartItems.findOne({ where: { id: itemsid, CartId: cartid } }, { transaction });
+                if (itemDetails) {
+                    itemDetails.deleted = true;
+                    await itemDetails.save({ transaction });
+                }
+            } else {
+                // delete before checkout
+                const itemDetails = await this.cartItems.findOne({ where: { id: itemsid, CartId: cartid } }, { transaction });
+                console.log(itemDetails)
+                if (!itemDetails) {
+                    throw new Error('Item not found in cart');
+                }
+                // Update the total price of the cart
+                const { unitPrice, quantity } = itemDetails;
+                cart.totalPrice -= unitPrice * quantity;
+                await cart.save({ transaction });
+                await this.cartItems.destroy({ where: { id: itemsid, CartId: cartid } }, { transaction });
+            }
+    
+            await transaction.commit();
+        } catch (error) {
+            await transaction.rollback();
+            throw error;
+        }
+         
+    }
+    
     
     
     

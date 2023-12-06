@@ -22,7 +22,7 @@ module.exports = (sequelize, DataTypes) => {
     Order.associate = function(models) {
         Order.belongsTo(models.User);
         Order.belongsTo(models.Cart);
-        Order.belongsToMany(models.Product, { through: models.OrderDetails, foreignKey: 'OrderId' });
+        Order.hasMany(models.OrderDetails)
     };
 
     Order.beforeCreate((order, options) => {
