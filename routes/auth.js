@@ -13,6 +13,10 @@ var crypto=require('crypto')
 router.use(jsend.middleware)
 require('dotenv').config();
 
+router.get('/login', function(req, res, next) {
+    res.render('index');
+  });
+
 router.post('/login', jsonParser, emailFormat, async (req, res, next) => {
     const { login, password } = req.body;
 
@@ -24,22 +28,21 @@ router.post('/login', jsonParser, emailFormat, async (req, res, next) => {
     }
 
     try {
-        const data = await userService.login(login);
+        const user = await userService.login(login);
 
-        if (!data) {
+        if (!user) {
             return res.jsend.fail({ result: "User or email not found" });
         }
-        console.log(data)
 
-        crypto.pbkdf2(password, data.salt, 310000, 32, "sha256", function (err, hashedPassword) {
+        crypto.pbkdf2(password, user.salt, 310000, 32, "sha256", function (err, hashedPassword) {
             if (err) {
                 return next(err);
             }
            
-            console.log("Database Password Length:", data.encryptedPassword.length); 
+            console.log("Database Password Length:", user.encryptedPassword.length); 
             console.log("Haseded password Length:", hashedPassword.length);       
 
-            if (!crypto.timingSafeEqual(data.encryptedPassword, hashedPassword)) {
+            if (!crypto.timingSafeEqual(user.encryptedPassword, hashedPassword)) {
                 return res.jsend.fail({ result: "Incorrect password" });
             }
             
@@ -47,10 +50,10 @@ router.post('/login', jsonParser, emailFormat, async (req, res, next) => {
             try {
                 token = jwt.sign(
                     {
-                        id: data.id,
-                        email: data.email,
-                        username: data.userName,
-                        role:data.role
+                        id: user.id,
+                        email: user.email,
+                        username: user.userName,
+                        role:user.role
                         },
                     process.env.TOKEN_SECRET, 
                     { expiresIn: "2h" }
@@ -61,12 +64,13 @@ router.post('/login', jsonParser, emailFormat, async (req, res, next) => {
 
             res.jsend.success({
                 result: "You are successfully logged in",
-                id: data.id,
-                email: data.email,
-                username: data.userName,
+                id: user.id,
+                email: user.email,
+                username: user.userName,
                 token: token,
-                role:data.role
+                role:user.role
             });
+           
         });
     } catch (error) {
         next(error);
