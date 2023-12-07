@@ -1,36 +1,39 @@
-console.log("Script outside loaded");
-
-document.addEventListener('DOMContentLoaded', (event) => {
-    console.log("Script loaded");
-
-    document.getElementById('loginForm').addEventListener('submit', function(e) {
-        console.log("Form submitted");
+$(document).ready(function() {
+    $('#loginForm').on('submit', function(e) {
         e.preventDefault();
 
-        const formData = new FormData(this);
-        fetch('/login', {
-            method: 'POST',
-            body: formData
-        })
-        .then(response => response.json())
-        .then(data => {
-            console.log(data);
-            if (data.status === 'success') {
-                localStorage.setItem('jwt', data.token);
+        var formObject = {};
+        var formData = $(this).serializeArray();
+        $.each(formData, function() {
+            formObject[this.name] = this.value;
+        });
+        console.log(formObject);
 
-                if (data.role === 'Admin') {
-                    window.location.href = '/admin'; // Redirect to the admin page
-                } else {
-                    alert('You are not Admin');
+        $.ajax({
+            url: '/login',
+            type: 'POST',
+            contentType: 'application/json',
+            data: JSON.stringify(formObject),
+            success: function(data) {
+                if (data.status == "fail") {
+                    alert("Right username/password required");
+                } else if (data.status == "success") {
+                    if (data.data.role == "User") {
+                        alert("You are not authorized to this page");
+                    } else if (data.data.role == "Admin") {
+                        localStorage.setItem('token',data.data.token);
+                        window.location.href = '/admin/products';
+                        console.log(data.data.token)
+                    }
                 }
-            } else {
-                alert('Login failed: ' + data.message);
+            },
+            error: function(xhr, status, error) {
+                console.error('Error:', error);
+                alert('An error occurred during login');
             }
-        })
-        .catch(error => {
-            console.error('Error:', error);
-            alert('An error occurred during login');
         });
     });
 });
+
+
 

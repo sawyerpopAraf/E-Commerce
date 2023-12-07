@@ -8,7 +8,7 @@ class ProductService{
     }
     async getProducts(){
        const query=`SELECT 
-       Products.name,Products.price,Products.description,Products.imageUrl,Products.quantity,  
+       Products.id,Products.name,Products.price,Products.description,Products.imageUrl,Products.quantity,  
        Categories.name AS categoryName, 
        Brands.name AS brandName
    FROM 

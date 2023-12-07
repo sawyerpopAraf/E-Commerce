@@ -62,14 +62,14 @@ router.post('/login', jsonParser, emailFormat, async (req, res, next) => {
                 return res.jsend.error("Something went wrong with creating JWT token");
             }
 
-            res.jsend.success({
-                result: "You are successfully logged in",
-                id: user.id,
-                email: user.email,
-                username: user.userName,
-                token: token,
-                role:user.role
-            });
+          res.jsend.success({
+                     id: user.id,
+                     email: user.email,
+                     username: user.userName,
+                     token: token,
+                     role: user.role
+        });
+
            
         });
     } catch (error) {

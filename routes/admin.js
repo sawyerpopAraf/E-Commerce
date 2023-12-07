@@ -114,6 +114,18 @@ router.post('/addproduct', jsonParser, isAuthAdmin, async(req,res,next) => {
     }
 });
 
+router.get('/products',jsonParser,async(req,res,next)=>{
+    try{
+        
+        const products = await productService.getProducts()
+        const brands=await brandService.getBrands()
+        const categories=await categoryService.getCategories()
+        res.render('products',{products:products,brands:brands,categories:categories})
+    }catch(error){
+        res.jsend.error({message: error.message})
+    }
+})
+
 router.post('/updateproduct/:id',jsonParser,isAuthAdmin, async(req,res,next)=>{
     const {id}=req.params
 
