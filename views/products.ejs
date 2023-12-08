@@ -10,6 +10,8 @@
   <script src="https://kit.fontawesome.com/91c7e26d12.js" crossorigin="anonymous"></script>
   <script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
  
+
+ 
 </head>
 
 <body>
@@ -20,36 +22,51 @@
    <div class="container mt-3">
       <h2 class="text-center mb-4">Products</h2>
       <div class="row">
-        <div class="col-lg-3 col-md-4 col-sm-6 mb-2">
-          <input type="text" id="searchFieldByName" class="form-control" placeholder="Search by name...">
+        <div class="col-lg-8 col-md-8 col-sm-12">
+          <div class="row">
+            <div class="col-lg-3 col-md-4 col-sm-6 mb-2">
+              <input type="text" id="byName" class="form-control" placeholder="Search by name...">
+            </div>
+            <div class="col-lg-3 col-md-4 col-sm-6 mb-2">
+              <select id="byBrand" class="form-control">
+                <option value="">Select Brand</option>
+                <% brands.forEach(function(brand) { %>
+                  <option value="<%= brand.name %>"><%= brand.name %></option>
+                <% }); %>
+              </select>
+            </div>
+            <div class="col-lg-3 col-md-4 col-sm-6 mb-2">
+              <select id="byCategory" class="form-control">
+                <option value="">Select Category</option>
+                <% categories.forEach(function(category) { %>
+                  <option value="<%= category.name %>"><%= category.name %></option>
+                <% }); %>
+              </select>
+            </div>
+            <div class="col-lg-3 col-md-12 mb-2 text-right">
+              <button id="searchButton" class="btn btn-info mr-2">
+                <i class="fa-solid fa-magnifying-glass"></i>
+              </button>
+              <button id="clearButton" class="btn btn-warning">
+                <i class="fa-solid fa-broom"></i>
+              </button>
+            </div>
+          </div>
         </div>
-        <div class="col-lg-3 col-md-4 col-sm-6 mb-2">
-          <select id="searchFieldBrand" class="form-control">
-            <option value="">Select Brand</option>
-            <% brands.forEach(function(brand) { %>
-              <option value="<%= brand.id %>"><%= brand.name %></option>
-            <% }); %>
-          </select>
-        </div>
-        <div class="col-lg-3 col-md-4 col-sm-6 mb-2">
-          <select id="searchFieldCategory" class="form-control">
-            <option value="">Select Category</option>
-            <% categories.forEach(function(category) { %>
-              <option value="<%= category.id %>"><%= category.name %></option>
-            <% }); %>
-          </select>
-        </div>
-        <div class="col-lg-3 col-md-12 text-right">
-          <button class="btn btn-success">
+        
+        <div class="col-lg-4 col-md-4 col-sm-12 text-right">
+          <button class="btn btn-success" id="addProduct">
             <i class="fa-sharp fa-solid fa-plus"></i> Add Product
           </button>
         </div>
+  
       </div>
     </div>
+  
     
     
-    <div class="table-responsive">
-      <table class="table table-hover"> <!-- 'table-hover' class is now correctly placed -->
+    <div class="table-responsive" id="originalTable">
+      <table class="table table-hover"> 
         <thead>
           <tr>
             <th scope="col">Image</th>
@@ -70,13 +87,29 @@
               <td><%= product.description %></td>
               <td><%= product.brandName %></td>
               <td><%= product.categoryName %></td>
-              <td><button id="editProductBtn" class="btn btn-success">
+              <td><button class="btn btn-success editProductBtn" data-id="<%= product.id %>">
                 <i class="fa-regular fa-pen-to-square"></i>Edit</button></td>
             </tr>
           <% }); %>
         </tbody>
       </table>
     </div>
+    <div id="searchResultsTable" class="table-responsive" style="display: none;">
+      <table class="table table-hover">
+          <thead> 
+            <tr>
+              <th scope="col">Image</th>
+              <th scope="col">Id</th>
+              <th scope="col">Name</th>
+              <th scope="col">Description</th>
+              <th scope="col">Brand</th>
+              <th scope="col">Category</th>
+              <th scope="col">Options</th>
+            </tr>
+          </thead>
+          <tbody></tbody>
+      </table>
+  </div>
   </div>
   
   
@@ -90,6 +123,8 @@
 
   <script src="../js/admin.js"></script>
   <script src="../js/search.js"></script>
+  <script src="../js/adminProduct.js"></script>
+  
 
 </body>
   

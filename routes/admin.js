@@ -20,6 +20,15 @@ var bodyParser=require('body-parser')
 var jsonParser=bodyParser.json()
 router.use(jsend.middleware)
 
+router.get('/brands',jsonParser,isAuthAdmin,async(req,res,next)=>{
+    try{
+      const brands = await brandService.getBrands()
+      res.render('brands',{brands:brands})
+    }catch(error){
+        res.jsend.error({message: error.message})
+    }
+})
+
 router.post('/addbrand', jsonParser, isAuthAdmin, async (req, res, next) => {
     const { brandname } = req.body;
     if (!brandname) {
@@ -116,11 +125,10 @@ router.post('/addproduct', jsonParser, isAuthAdmin, async(req,res,next) => {
 
 router.get('/products',jsonParser,isAuthAdmin,async(req,res,next)=>{
     try{
-        
-        const products = await productService.getProducts()
-        const brands=await brandService.getBrands()
-        const categories=await categoryService.getCategories()
-        res.render('products',{products:products,brands:brands,categories:categories})
+      const products = await productService.getProducts()
+      const brands = await brandService.getBrands()
+      const categories = await categoryService.getCategories()
+      res.render('products',{products:products,brands:brands,categories:categories})
     }catch(error){
         res.jsend.error({message: error.message})
     }
