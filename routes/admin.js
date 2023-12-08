@@ -114,7 +114,7 @@ router.post('/addproduct', jsonParser, isAuthAdmin, async(req,res,next) => {
     }
 });
 
-router.get('/products',jsonParser,async(req,res,next)=>{
+router.get('/products',jsonParser,isAuthAdmin,async(req,res,next)=>{
     try{
         
         const products = await productService.getProducts()

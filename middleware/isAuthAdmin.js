@@ -1,33 +1,33 @@
 const jwt = require('jsonwebtoken');
 
 function isAuthAdmin(req, res, next) {
-    console.log("thisd2 first line is working ")
-    const authHeader = req.headers.authorization; 
-    console.log(req.headers);
+    console.log("Middleware isAuthAdmin is working");
 
-    console.log(authHeader)
-    if (!authHeader) {
-        return res.status(401).json({error: 'Unauthorized'});
-    }
-    
-    const token = authHeader.split(' ')[1];
-    console.log(token)
+    const token = req.cookies.token; 
+    console.log("Token from cookie:", token);
+
     if (!token) {
-        return res.status(400).jsend.fail({result:"Token is required."})
+        return res.status(401).json({ error: 'Unauthorized. No token provided.' });
     }
 
     try {
+       
         const decodedToken = jwt.verify(token, process.env.TOKEN_SECRET);
-        req.userData = decodedToken;  
-        if(req.userData.role!=='Admin'){
-            return res.jsend.fail({result:"You are not authorized"})
+        console.log("Decoded token:", decodedToken);
+
+        // Check if the role is Admin
+        if (decodedToken.role !== 'Admin') {
+            return res.status(403).json({ result: "Access denied. Not an admin." });
         }
+
+        // If the user is an admin, attach the user data to the request and call next
+        req.userData = decodedToken;
         next();
     } catch (err) {
-        return res.jsend.fail({statusCode:401,"result": err.message});  
-	}
-
-   
+        console.log("Token verification failed:", err.message);
+        return res.status(401).json({ result: "Invalid token." });
+    }
 }
 
-module.exports = isAuthAdmin;    
+module.exports = isAuthAdmin;
+ 

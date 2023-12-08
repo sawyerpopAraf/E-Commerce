@@ -39,10 +39,7 @@ router.post('/login', jsonParser, emailFormat, async (req, res, next) => {
                 return next(err);
             }
            
-            console.log("Database Password Length:", user.encryptedPassword.length); 
-            console.log("Haseded password Length:", hashedPassword.length);       
-
-            if (!crypto.timingSafeEqual(user.encryptedPassword, hashedPassword)) {
+           if (!crypto.timingSafeEqual(user.encryptedPassword, hashedPassword)) {
                 return res.jsend.fail({ result: "Incorrect password" });
             }
             
@@ -62,7 +59,12 @@ router.post('/login', jsonParser, emailFormat, async (req, res, next) => {
                 return res.jsend.error("Something went wrong with creating JWT token");
             }
 
-          res.jsend.success({
+            res.cookie('token', token, {
+                httpOnly: true,
+                maxAge: 7200000 
+              });
+
+            res.jsend.success({
                      id: user.id,
                      email: user.email,
                      username: user.userName,

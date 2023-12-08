@@ -21,9 +21,8 @@ $(document).ready(function() {
                     if (data.data.role == "User") {
                         alert("You are not authorized to this page");
                     } else if (data.data.role == "Admin") {
-                        localStorage.setItem('token',data.data.token);
-                        window.location.href = '/admin/products';
-                        console.log(data.data.token)
+                        // Token is now stored in an HTTP-only cookie, so we don't need to store it in localStorage.
+                        window.location.href = '/admin/products'; // Redirect if admin
                     }
                 }
             },
