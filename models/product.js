@@ -19,7 +19,12 @@ module.exports = (sequelize, DataTypes) => {
         quantity: {
             type: DataTypes.INTEGER,
             allowNull: false,
-        }
+        },	
+        deleted:{
+            type:DataTypes.BOOLEAN,
+            allowNull:true,
+            defaultValue:false
+        },
     }, {
         timestamps: false,
     });

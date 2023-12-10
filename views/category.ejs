@@ -17,11 +17,11 @@
   </div>
   <div class="data-table-container">
     <div class="container mt-3">
-       <h2 class="text-center mb-4">Brands</h2>
-       <div class="row justify-content-end"> <!-- Use justify-content-end to align the button to the right -->
+       <h2 class="text-center mb-4">Categories</h2>
+       <div class="row justify-content-end"> 
           <div class="col-lg-4 col-md-4 col-sm-12">
-           <button class="btn btn-success" id="addBrand">
-             <i class="fa-sharp fa-solid fa-plus"></i> Add Brand
+           <button class="btn btn-success" id="addCategory">
+             <i class="fa-sharp fa-solid fa-plus"></i> Add Category
            </button>
          </div>
        </div>
@@ -37,17 +37,17 @@
            </tr>
          </thead>
          <tbody>
-           <% brands.forEach(function(brand) { %>
+           <% categories.forEach(function(category) { %>
              <tr>
-               <td><%= brand.id %></td>
-               <td><%= brand.name %></td>
+               <td><%= category.id %></td>
+               <td><%= category.name %></td>
                <td>
-                 <button class="btn btn-success updateBrandBtn" data-id="<%= brand.id %>">
+                 <button class="btn btn-success updateCategoryBtn" data-id="<%= category.id %>">
                    <i class="fa-regular fa-pen-to-square"></i>Update
                  </button>
                </td>
                <td>
-                 <button class="btn btn-danger deleteBrandBtn" data-id="<%= brand.id %>">
+                 <button class="btn btn-danger deleteCategoryBtn" data-id="<%= category.id %>">
                    <i class="fa-solid fa-trash"></i>Delete
                  </button>
                </td>
@@ -57,5 +57,5 @@
        </table>
      </div>  
    </div>
- <script src="../js/adminBrand.js"></script>
+ <script src="../js/adminCategory.js"></script>
 </body>

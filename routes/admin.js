@@ -45,7 +45,7 @@ router.post('/addbrand', jsonParser, isAuthAdmin, async (req, res, next) => {
     }
 });
 
-router.post('/updatebrand/:id',isAuthAdmin, async(req,res,next)=>{
+router.put('/updatebrand/:id',isAuthAdmin, async(req,res,next)=>{
     const{newbrand}=req.body
     if(newbrand==null){
         return res.jsend.fail({result:"newbrand name needed"})
@@ -68,6 +68,15 @@ router.delete('/deletebrand/:id',isAuthAdmin,async(req,res,next)=>{
     }
 })
 
+router.get('/category',jsonParser,isAuthAdmin,async(req,res,next)=>{
+    try{
+      const categories = await categoryService.getCategories()
+      res.render('category',{categories:categories})
+    }catch(error){
+        res.jsend.error({message: error.message})
+    }
+})
+
 router.post('/addcategory', jsonParser, isAuthAdmin, async(req,res,next) => {
     const { categoryname } = req.body;
     if (!categoryname) {
@@ -84,7 +93,7 @@ router.post('/addcategory', jsonParser, isAuthAdmin, async(req,res,next) => {
     }
 });
 
-router.post('updatecategory/:id',jsonParser,isAuthAdmin, async(req,res,next)=>{
+router.put('/updatecategory/:id',jsonParser,isAuthAdmin, async(req,res,next)=>{
     const{newcategory}=req.body
     if(newcategory==null){
         return res.jsend.fail({result:"new category name needed"})
@@ -128,13 +137,14 @@ router.get('/products',jsonParser,isAuthAdmin,async(req,res,next)=>{
       const products = await productService.getProducts()
       const brands = await brandService.getBrands()
       const categories = await categoryService.getCategories()
+      console.log(products  )
       res.render('products',{products:products,brands:brands,categories:categories})
     }catch(error){
         res.jsend.error({message: error.message})
     }
 })
 
-router.post('/updateproduct/:id',jsonParser,isAuthAdmin, async(req,res,next)=>{
+router.put('/updateproduct/:id',jsonParser,isAuthAdmin, async(req,res,next)=>{
     const {id}=req.params
 
     const { name,price,description,imageUrl,quantity,brandId,categoryId } = req.body;    
@@ -168,7 +178,7 @@ router.get('/orders',isAuthAdmin,async(req,res,next)=>{
     }
 })
 
-router.post('/orderStatus/:id',jsonParser,isAuthAdmin,async(req,res,next)=>{
+router.put('/orderStatus/:id',jsonParser,isAuthAdmin,async(req,res,next)=>{
      const id=parseInt(req.params.id)
      const {newStatus}=req.body
     try{
@@ -179,16 +189,34 @@ router.post('/orderStatus/:id',jsonParser,isAuthAdmin,async(req,res,next)=>{
     }
 })
 
-router.put('/role/:id',jsonParser,isAuthAdmin,async(req,res,next)=>{
+router.get('/users',isAuthAdmin,async(req,res,next)=>{
+    try{
+        const users= await userService.getUsers()
+        res.render('users',{users,users})
+    }catch(error){
+        res.jsend.error({message:error.message})
+    }
+})
+
+router.put('/role/:id',isAuthAdmin,async(req,res,next)=>{
     const id=parseInt(req.params.id)
-    const {newRole}=req.body
-   
    try{
-       const data=await userService.changeUserRole(id,newRole)
-       return res.jsend.success({result:data})
+       const data=await userService.changeUserRole(id)
+       console.log(data)
+       return res.jsend.success({result:data.role})
    }catch(error){
        res.jsend.error({message: error.message})
    }
 })
 
+router.delete('/users/:id',isAuthAdmin,async(req,res,next)=>{
+    const id=parseInt(req.params.id)
+   try{
+       const data=await userService.deleteUser(id)
+       console.log(data)
+       return res.jsend.success({result:"User deleted"})
+   }catch(error){
+       res.jsend.error({message: error.message})
+   }
+})
 module.exports=router

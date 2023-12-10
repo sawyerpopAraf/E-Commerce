@@ -60,9 +60,9 @@ class initData {
             const categoryId=Number (categoryMap[product.category])
             await db.sequelize.query(`
                 INSERT INTO Products 
-                (id, name, price, description, imageUrl, quantity, brandId, categoryId) 
+                (id, name, price, description, imageUrl, quantity, deleted, brandId, categoryId) 
                 VALUES 
-                (${product.id}, '${product.name}', ${product.price}, '${product.description}', '${product.imgurl}', ${product.quantity}, ${brandId}, ${categoryId})
+                (${product.id}, '${product.name}', ${product.price}, '${product.description}', '${product.imgurl}', ${product.quantity}, false,${brandId}, ${categoryId})
             `);
         }
 

@@ -40,18 +40,29 @@ class UserService{
       })
     }
 
-    async changeUserRole(userid,newRole){
+    async changeUserRole(userid){
         const user=await this.user.findOne({where:{id:userid}})
         if(!user){
             throw new Error("Userid wrong")
         }
-        user.role=newRole
+        user.role="Admin"
         await user.save()
         return user 
     }
    
+    async getUsers(){
+        return await this.user.findAll({
+            attributes:{exclude:['encryptedPassword','salt']}
+        })
+    }
 
-
+    async deleteUser(userid){
+        const user=await this.user.findOne({where:{id:userid}})
+        user.deleted=true
+        await user.save()
+        return user
+    }
+   
 
 }
 

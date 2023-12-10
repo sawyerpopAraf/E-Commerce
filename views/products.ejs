@@ -73,6 +73,7 @@
             <th scope="col">Id</th>
             <th scope="col">Name</th>
             <th scope="col">Description</th>
+            <th scope="col">Deleted</th>
             <th scope="col">Brand</th>
             <th scope="col">Category</th>
             <th scope="col">Options</th>
@@ -85,10 +86,11 @@
               <td><%= product.id %></td>
               <td><%= product.name %></td>
               <td><%= product.description %></td>
+              <td><%= product.deleted %></td>
               <td><%= product.brandName %></td>
               <td><%= product.categoryName %></td>
               <td><button class="btn btn-success editProductBtn" data-id="<%= product.id %>">
-                <i class="fa-regular fa-pen-to-square"></i>Edit</button></td>
+                <i class="fa-regular fa-pen-to-square"></i>Update</button></td>
             </tr>
           <% }); %>
         </tbody>
@@ -121,7 +123,7 @@
   
   
 
-  <script src="../js/admin.js"></script>
+ 
   <script src="../js/search.js"></script>
   <script src="../js/adminProduct.js"></script>
   

@@ -1,3 +1,4 @@
+
 module.exports = (sequelize, Sequelize) => {
 	const User = sequelize.define(
 		'User',
@@ -47,6 +48,11 @@ module.exports = (sequelize, Sequelize) => {
                 type:Sequelize.DataTypes.ENUM('Bronze', 'Silver', 'Gold'),
                 allowNull:true,
 				
+            },
+			deleted:{
+				type:Sequelize.DataTypes.BOOLEAN,
+				allowNull:false,
+				defaultValue:false
             },
 			totalPurchased:{
 				type:Sequelize.DataTypes.INTEGER,

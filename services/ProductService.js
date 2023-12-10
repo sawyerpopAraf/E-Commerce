@@ -8,7 +8,7 @@ class ProductService{
     }
     async getProducts(){
        const query=`SELECT 
-       Products.id,Products.name,Products.price,Products.description,Products.imageUrl,Products.quantity,  
+       Products.id,Products.name,Products.price,Products.description,Products.deleted,Products.imageUrl,Products.quantity,  
        Categories.name AS categoryName, 
        Brands.name AS brandName
    FROM 
@@ -94,19 +94,16 @@ class ProductService{
         )}
 
     async deleteProduct(id){
-            const existingId=await this.product.findOne({
+            const product=await this.product.findOne({
                 where:{
                     id:id
                 }
             })
-            if(!existingId){
+            if(!product){
                 throw new Error("product not found")
             }
-            return await this.product.destroy({
-                where:{
-                    id:id
-                }
-            })
+            product.deleted=true
+            await product.save()
         }
 
     async search(name){

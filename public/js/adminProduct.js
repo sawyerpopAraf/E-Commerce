@@ -95,7 +95,7 @@ document.querySelectorAll('.editProductBtn').forEach(button=>{
             if (result.isConfirmed) {
          
                 fetch('/admin/updateproduct/'+productId, {
-                  method: 'POST',
+                  method: 'PUT',
                   headers: {
                     'Content-Type': 'application/json',
                   },
