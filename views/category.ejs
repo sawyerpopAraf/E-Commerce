@@ -19,7 +19,7 @@
     <div class="container mt-3">
        <h2 class="text-center mb-4">Categories</h2>
        <div class="row justify-content-end"> 
-          <div class="col-lg-4 col-md-4 col-sm-12">
+          <div class="col-lg-8 col-md-4 col-sm-12">
            <button class="btn btn-success" id="addCategory">
              <i class="fa-sharp fa-solid fa-plus"></i> Add Category
            </button>
@@ -43,12 +43,10 @@
                <td><%= category.name %></td>
                <td>
                  <button class="btn btn-success updateCategoryBtn" data-id="<%= category.id %>">
-                   <i class="fa-regular fa-pen-to-square"></i>Update
-                 </button>
-               </td>
-               <td>
+                   <i class="fa-solid fa-wrench"></i>
+                 </button>              
                  <button class="btn btn-danger deleteCategoryBtn" data-id="<%= category.id %>">
-                   <i class="fa-solid fa-trash"></i>Delete
+                   <i class="fa-solid fa-trash"></i>
                  </button>
                </td>
              </tr>
@@ -58,4 +56,6 @@
      </div>  
    </div>
  <script src="../js/adminCategory.js"></script>
+ <script src="../js/logout.js"></script>
+
 </body>

@@ -49,15 +49,18 @@
                <td><%= user.tlfNumber %></td>
                <td><%= user.memberShip %></td>
                <td><%= user.totalPurchased %></td>
-               <td><%= user.deleted %></td>
+               <td><%= user.deleted ? "Yes" : "No" %></td>
                <td><%= user.role %></td>
               <td>
                  <button class="btn btn-success updateRole" data-id="<%= user.id %>">
-                   <i class="fa-regular fa-pen-to-square"></i>Update Role
+                   <i class="fa-regular fa-pen-to-square"></i>
                  </button>
                 <button class="btn btn-danger deleteUser" data-id="<%= user.id %>">
-                   <i class="fa-solid fa-trash"></i>Delete
+                   <i class="fa-solid fa-trash"></i>
                  </button>
+                 <button class="btn btn-warning activeUser" data-id="<%= user.id %>">
+                  <i class="fa-solid fa-circle-plus"></i>
+                </button>
                </td>
              </tr>
            <% }); %>
@@ -66,4 +69,6 @@
      </div>  
    </div>
  <script src="../js/adminUser.js"></script>
+ <script src="../js/logout.js"></script>
+
 </body>

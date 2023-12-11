@@ -169,7 +169,17 @@ router.delete('/deleteproduct/:id',isAuthAdmin,async(req,res,next)=>{
     }
 })
 
-router.get('/orders',isAuthAdmin,async(req,res,next)=>{
+router.put('/reactiveproduct/:id',isAuthAdmin,async(req,res,next)=>{
+    const {id}=req.params
+    try{
+        const data=await productService.reactive(id)
+        return res.jsend.success({result:data})
+    }catch(error){
+        res.jsend.error({message: error.message})
+    }
+})
+
+router.get('/ordersDetails',isAuthAdmin,async(req,res,next)=>{
     try{
         const data=await orderService.orderDetailsAdmin()
         return res.jsend.success({result:data})
@@ -178,7 +188,7 @@ router.get('/orders',isAuthAdmin,async(req,res,next)=>{
     }
 })
 
-router.put('/orderStatus/:id',jsonParser,isAuthAdmin,async(req,res,next)=>{
+router.put('/orderstatus/:id',jsonParser,isAuthAdmin,async(req,res,next)=>{
      const id=parseInt(req.params.id)
      const {newStatus}=req.body
     try{
@@ -188,6 +198,19 @@ router.put('/orderStatus/:id',jsonParser,isAuthAdmin,async(req,res,next)=>{
         res.jsend.error({message: error.message})
     }
 })
+
+router.get('/orders',isAuthAdmin,async(req,res,next)=>{
+    try{
+        const orders=await orderService.getOrdersFrontEnd()
+        console.log(orders)
+        res.render('orders',{orders:orders})
+    }catch(error){
+        res.jsend.error({message: error.message})
+    }
+})
+
+
+
 
 router.get('/users',isAuthAdmin,async(req,res,next)=>{
     try{
@@ -215,6 +238,17 @@ router.delete('/users/:id',isAuthAdmin,async(req,res,next)=>{
        const data=await userService.deleteUser(id)
        console.log(data)
        return res.jsend.success({result:"User deleted"})
+   }catch(error){
+       res.jsend.error({message: error.message})
+   }
+})
+
+router.put('/users/:id',isAuthAdmin,async(req,res,next)=>{
+    const id=parseInt(req.params.id)
+   try{
+       const data=await userService.reactiveUser(id)
+       console.log(data)
+       return res.jsend.success({result:"User added back to database"})
    }catch(error){
        res.jsend.error({message: error.message})
    }

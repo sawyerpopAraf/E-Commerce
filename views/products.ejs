@@ -86,11 +86,17 @@
               <td><%= product.id %></td>
               <td><%= product.name %></td>
               <td><%= product.description %></td>
-              <td><%= product.deleted %></td>
+              <td><%= product.deleted ? "Yes" : "No" %></td>
               <td><%= product.brandName %></td>
               <td><%= product.categoryName %></td>
+              
               <td><button class="btn btn-success editProductBtn" data-id="<%= product.id %>">
-                <i class="fa-regular fa-pen-to-square"></i>Update</button></td>
+                <i class="fa-solid fa-wrench"></i></button>
+                <button class="btn btn-danger deleteProductBtn" data-id="<%= product.id %>">
+                  <i class="fa-solid fa-trash"></i></button>
+                  <button class="btn btn-warning reactiveProductBtn" data-id="<%= product.id %>">
+                    <i class="fa-solid fa-circle-plus"></i></button>
+              </td>
             </tr>
           <% }); %>
         </tbody>
@@ -126,6 +132,8 @@
  
   <script src="../js/search.js"></script>
   <script src="../js/adminProduct.js"></script>
+  <script src="../js/logout.js"></script>
+
   
 
 </body>

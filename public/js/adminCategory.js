@@ -120,8 +120,8 @@ document.querySelectorAll('.deleteCategoryBtn').forEach(button => {
               Swal.fire('Deleted!', 'Category deleted', 'success').then(() => {
                 location.reload();
               });
-            } else if(data.message==="Category is in use"){
-                Swal.fire('Category is in use')
+            } else if(data.status==="error"){
+                Swal.fire(data.message)
             }
           })
           .catch(error => {

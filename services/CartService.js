@@ -41,7 +41,7 @@ class CartService{
               }, { transaction });
   
               if (!product || product.quantity < cartItem.quantity) {
-                  throw new Error(`Product with ID ${cartItem.productId} is out of stock or does not have enough quantity.`);
+                  throw new Error(`Product with ID ${cartItem.ProductId} is out of stock or does not have enough quantity.`);
               }
   
               product.quantity -= cartItem.quantity;

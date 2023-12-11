@@ -55,10 +55,6 @@ document.getElementById('addProduct').addEventListener('click',function(){
       });
 })
 
-
-
-
-
 document.querySelectorAll('.editProductBtn').forEach(button=>{
     button.addEventListener('click',function(){
         let productId=this.getAttribute('data-id')
@@ -110,6 +106,9 @@ document.querySelectorAll('.editProductBtn').forEach(button=>{
                   .then(()=>
                   location.reload()) 
                  }
+                 else if(data.status=="error"){
+                  Swal.fire(data.message)
+                 }
                })
                 .catch(error => {
                  Swal.fire('Error:', error);
@@ -118,3 +117,89 @@ document.querySelectorAll('.editProductBtn').forEach(button=>{
         })
     })
 })
+
+document.querySelectorAll('.deleteProductBtn').forEach(button => {
+  button.addEventListener('click', function() {
+    let id = this.getAttribute('data-id');
+
+    Swal.fire({
+      title: "Do you want to delete this Product?",
+      text: "Delete the product",
+      icon: 'warning',
+      showCancelButton: true,
+      confirmButtonText: "Delete",
+      cancelButtonText: "Cancel"
+    }).then((result) => {
+      if (result.isConfirmed) {
+        fetch('/admin/deleteproduct/'+id, {  
+          method:'DELETE',
+          headers: {
+            'Content-Type': 'application/json'
+          },
+          credentials: 'include'
+          
+        })
+        .then(response => {
+          if (!response.ok) {
+            throw new Error('Network response was not ok');
+          }
+          return response.json();
+       })
+        .then(data => {
+          if (data.status === "success") {  
+            Swal.fire('Deleted!', 'Product deleted', 'success').then(() => {
+              location.reload();
+            });
+          } 
+        })
+        .catch(error => {
+          Swal.fire('Error', error.toString(), 'error');
+        });
+      }
+    });
+  });
+});
+
+document.querySelectorAll('.reactiveProductBtn').forEach(button => {
+  button.addEventListener('click', function() {
+    let id = this.getAttribute('data-id');
+
+    Swal.fire({
+      title: "Do you want to reactive this product?",
+      text: "Reactive the product",
+      icon: 'warning',
+      showCancelButton: true,
+      confirmButtonText: "Update",
+      cancelButtonText: "Cancel"
+    }).then((result) => {
+      if (result.isConfirmed) {
+        fetch('/admin/reactiveproduct/'+id, {  
+          method:'PUT',
+          headers: {
+            'Content-Type': 'application/json'
+          },
+          credentials: 'include'
+        })
+        .then(response => {
+          if (!response.ok) {
+            return response.json().then(data => {
+              throw new Error(data.message || 'Unknown error');
+            });
+          }
+          return response.json();
+        })
+        .then(data => {
+          if (data.status === "success") {  
+            Swal.fire('Product is no longer deleted').then(() => location.reload());
+          }
+          else if(data.status==="error"){
+            Swal.fire('Error',data.message)
+          }
+        })
+        .catch(error => {
+          Swal.fire('Error', error.toString(), 'error');
+        });
+      }
+    });
+  });
+});

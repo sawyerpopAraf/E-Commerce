@@ -123,8 +123,8 @@ document.querySelectorAll('.deleteBrandBtn').forEach(button => {
               Swal.fire('Deleted!', 'Brand deleted', 'success').then(() => {
                 location.reload();
               });
-            } else if(data.message==="Brand is in use"){
-                Swal.fire('Brand is in use')
+            } else if(data.status==="error"){
+                Swal.fire(data.message)
             }
           })
           .catch(error => {

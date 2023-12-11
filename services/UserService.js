@@ -45,8 +45,18 @@ class UserService{
         if(!user){
             throw new Error("Userid wrong")
         }
-        user.role="Admin"
-        await user.save()
+        if(user.deleted==true){
+            throw new Error("User is no longer activate")
+        }
+        if(user.role=="User"){ 
+         user.role="Admin"
+         await user.save()
+          }
+        else if(user.role=="Admin"){
+            user.role="User"
+            await user.save()
+            
+        }
         return user 
     }
    
@@ -62,6 +72,20 @@ class UserService{
         await user.save()
         return user
     }
+
+    async reactiveUser(userid){
+        const user = await this.user.findOne({ where: { id: userid } });
+        
+        if (user.deleted == false) {
+            throw new Error("This user is already active");
+        } else {
+            user.deleted = false;
+            await user.save();
+            
+        }
+        return user;
+    }
+    
    
 
 }

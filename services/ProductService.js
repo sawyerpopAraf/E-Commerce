@@ -105,6 +105,24 @@ class ProductService{
             product.deleted=true
             await product.save()
         }
+        async reactive(id) {
+            const product = await this.product.findOne({
+                where: {
+                    id: id
+                }
+            });
+        
+            if (!product) {
+                throw new Error("Product not found");
+            } else if (product.deleted === false) {
+                throw new Error("Product is not deleted");
+            } else {
+                product.deleted = false;
+                await product.save();
+                return product;
+            }
+        }
+        
 
     async search(name){
          const query=`SELECT 

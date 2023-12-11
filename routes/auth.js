@@ -124,4 +124,9 @@ router.post("/signup",jsonParser,emailFormat, async (req, res, next) => {
     }
   });
 
+router.post('/logout',(req,res)=>{
+    res.cookie('token','',{maxAge:0})
+    res.jsend.success({message:"logged out"})
+})
+
 module.exports=router

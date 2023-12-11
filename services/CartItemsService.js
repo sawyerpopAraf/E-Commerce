@@ -29,7 +29,7 @@ class CartItemsService{
     async createItems(productId, quantity, userId) {
         
         let choosedProduct = await this.product.findOne({ where: { id: productId } });
-        if (choosedProduct == null || choosedProduct.quantity == 0) {
+        if (choosedProduct == null || choosedProduct.quantity == 0||choosedProduct.delete==true) {
             throw new Error("Sorry, this product is currently out of stock");
         }
         

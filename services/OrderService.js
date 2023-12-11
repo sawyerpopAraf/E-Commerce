@@ -38,9 +38,6 @@ async orderDetailsUsers(userid) {
   return allOrders;
 }
 
-
-  
-
 async orderDetailsAdmin(){
   const allOrders = await this.order.findAll({
     include: [
@@ -57,6 +54,12 @@ async orderDetailsAdmin(){
     ]
 });
 return allOrders;
+}
+
+async getOrdersFrontEnd(){
+    const allOrder=await this.order.findAll({
+    })
+    return allOrder
 }
 
 

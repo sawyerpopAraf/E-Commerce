@@ -17,37 +17,35 @@
   </div>
   <div class="data-table-container">
     <div class="container mt-3">
-       <h2 class="text-center mb-4">Brands</h2>
-       <div class="row justify-content-end">
-          <div class="col-lg-8 col-md-8 col-sm-12">
-           <button class="btn btn-success" id="addBrand">
-             <i class="fa-sharp fa-solid fa-plus"></i> Add Brand
-           </button>
-         </div>
-       </div>
-     </div>
+       <h2 class="text-center mb-4">Orders</h2>
+    </div>
    
      <div class="table-responsive" >
        <table class="table table-hover"> 
          <thead>
            <tr>
              <th scope="col">Id</th>
-             <th scope="col">Name</th>
-             <th scope="col" colspan="2">Options</th>
-           </tr>
+             <th scope="col">Order Number</th>
+             <th scope="col">Created</th>
+             <th scope="col">Updated</th>
+             <th scope="col">UserId</th>
+             <th scope="col">OrderStatus</th>
+             <th scope="col">Options</th>
+            </tr>
          </thead>
          <tbody>
-           <% brands.forEach(function(brand) { %>
+           <% orders.forEach(function(order) { %>
              <tr>
-               <td><%= brand.id %></td>
-               <td><%= brand.name %></td>
-               <td>
-                 <button class="btn btn-success updateBrandBtn" data-id="<%= brand.id %>">
-                   <i class="fa-solid fa-wrench"></i>
-                 </button>
-                 <button class="btn btn-danger deleteBrandBtn" data-id="<%= brand.id %>">
-                   <i class="fa-solid fa-trash"></i>
-                 </button>
+               <td><%= order.id %></td>
+               <td><%= order.orderNumber %></td>
+               <td><%= new Date (order.createdAt).toLocaleDateString() %></td>
+               <td><%= new Date (order.updatedAt).toLocaleDateString() %></td>
+               <td><%= order.UserId %></td>
+               <td><%= order.status %></td>
+              <td>
+                 <button class="btn btn-success updateOrder" data-id="<%= order.id %>">
+                   <i class="fa-regular fa-pen-to-square"></i>
+                 </button>            
                </td>
              </tr>
            <% }); %>
@@ -55,7 +53,7 @@
        </table>
      </div>  
    </div>
- <script src="../js/adminBrand.js"></script>
+ <script src="../js/adminOrder.js"></script>
  <script src="../js/logout.js"></script>
 
 </body>
