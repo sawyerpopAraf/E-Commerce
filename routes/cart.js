@@ -28,19 +28,4 @@ router.post('/checkout/:cartId', jsonParser, isAuthMember, async(req,res,next) =
     }
 });
 
-router.post('/changeStatus/:orderId',jsonParser,isAuthAdmin,async(req,res,next)=>{
-    const{newStatus}=req.body
-    try{
-        const data=await cartService.checkOut(req.params.orderId,newStatus)
-        if(!data){
-            return res.jsend.fail({result:"No data returned"})
-        }
-        res.jsend.success((data))
-    }
-    catch(error){
-        res.jsend.error({message:error.message})
-    }
-})
-
-
 module.exports=router

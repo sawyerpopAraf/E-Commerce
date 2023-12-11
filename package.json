@@ -3,7 +3,8 @@
   "version": "0.0.0",
   "private": true,
   "scripts": {
-    "start": "nodemon ./bin/www"
+    "start": "node ./bin/www",
+    "test": "jest"
   },
   "dependencies": {
     "connect-sqlite3": "^0.9.13",
@@ -13,6 +14,7 @@
     "ejs": "^3.1.9",
     "express": "^4.18.2",
     "http-errors": "~1.6.3",
+    "jest": "^29.7.0",
     "jsend": "^1.1.0",
     "jsonwebtoken": "^9.0.2",
     "morgan": "~1.9.1",
@@ -22,6 +24,7 @@
     "passport": "^0.7.0",
     "passport-local": "^1.0.0",
     "sequelize": "^6.35.1",
-    "sqlite3": "^5.1.6"
+    "sqlite3": "^5.1.6",
+    "supertest": "^6.3.3"
   }
 }

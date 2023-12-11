@@ -9,7 +9,6 @@ var db=require('./models')
 db.sequelize.sync({force:false})
 
 var indexRouter = require('./routes/index');
-var usersRouter = require('./routes/users');
 var initRouter=require('./routes/initData')
 var authRouter=require('./routes/auth')
 var categoryRouter=require('./routes/category')
@@ -39,7 +38,6 @@ app.use(express.static(path.join(__dirname, 'public')));
 
 
 app.use('/', indexRouter);
-app.use('/users', usersRouter);
 app.use('/init', initRouter);
 app.use('/', authRouter);
 app.use('/category', categoryRouter);
