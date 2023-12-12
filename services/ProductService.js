@@ -131,7 +131,6 @@ class ProductService{
             }
         }
         
-
     async search(name){
          const query=`SELECT 
          Products.name,Products.price,Products.description,Products.imageUrl,Products.quantity,  
@@ -149,10 +148,6 @@ class ProductService{
         const[results,metadata]=await this.sequelize.query(query)
         return results
     }
-    
-
-
-
 }
 
 module.exports=ProductService

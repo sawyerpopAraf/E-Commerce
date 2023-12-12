@@ -13,6 +13,9 @@ var jsonParser=bodyParser.json()
 router.use(jsend.middleware)
 
 router.post('/checkout/:cartId', jsonParser, isAuthMember, async(req,res,next) => {
+       // #swagger.tags = ['User routes']
+        // #swagger.description = "check out cart for individual user" 
+        // #swagger.responses = [200]
     const cartId = parseInt(req.params.cartId);
     const userId= req.userData.id
     console.log(cartId,userId)

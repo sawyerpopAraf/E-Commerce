@@ -1,4 +1,8 @@
 require('dotenv').config();
+const swaggerUi = require('swagger-ui-express')
+const swaggerFile = require('./swagger-output.json')
+const bodyParser = require('body-parser')
+
 var createError = require('http-errors');
 var express = require('express');
 var path = require('path');
@@ -20,10 +24,7 @@ var cartItems=require('./routes/cartItems')
 var cartRouter=require('./routes/cart')
 var orderRouter=require('./routes/order')
 
-
 var app = express();
-
-
 
 // view engine setup
 app.set('views', path.join(__dirname, 'views'));
@@ -34,8 +35,6 @@ app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
-
-
 
 app.use('/', indexRouter);
 app.use('/init', initRouter);
@@ -49,7 +48,8 @@ app.use('/item', cartItems);
 app.use('/cart', cartRouter);
 app.use('/order', orderRouter);
 
-
+app.use(bodyParser.json())
+app.use('/doc', swaggerUi.serve, swaggerUi.setup(swaggerFile))
 
 
 // catch 404 and forward to error handler

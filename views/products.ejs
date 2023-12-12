@@ -9,9 +9,6 @@
   <link rel="stylesheet" href="../stylesheets/product.css">
   <script src="https://kit.fontawesome.com/91c7e26d12.js" crossorigin="anonymous"></script>
   <script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
- 
-
- 
 </head>
 
 <body>
@@ -62,9 +59,7 @@
   
       </div>
     </div>
-  
-    
-    
+   
     <div class="table-responsive" id="originalTable">
       <table class="table table-hover"> 
         <thead>
@@ -73,6 +68,7 @@
             <th scope="col">Id</th>
             <th scope="col">Name</th>
             <th scope="col">Description</th>
+            <th scope="col">Quantity</th>
             <th scope="col">Deleted</th>
             <th scope="col">Brand</th>
             <th scope="col">Category</th>
@@ -86,6 +82,7 @@
               <td><%= product.id %></td>
               <td><%= product.name %></td>
               <td><%= product.description %></td>
+              <td><%= product.quantity %></td>
               <td><%= product.deleted ? "Yes" : "No" %></td>
               <td><%= product.brandName %></td>
               <td><%= product.categoryName %></td>

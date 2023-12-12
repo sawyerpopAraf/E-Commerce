@@ -50,9 +50,7 @@ class initData {
                 categoryMap[category]=categoriesRecord.id
             }
         }
-      
-
-        
+            
         //insert Products 
         for (const product of products) {
             const brandId=Number(brandMap[product.brand])

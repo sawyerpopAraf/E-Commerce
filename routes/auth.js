@@ -14,10 +14,18 @@ router.use(jsend.middleware)
 require('dotenv').config();
 
 router.get('/login', function(req, res, next) {
+      // #swagger.tags = ['Auth']
+     // #swagger.description = "login page"
+     // #swagger.produces = ['text/html']
+      // #swagger.responses = [200]
     res.render('index');
   });
 
 router.post('/login', jsonParser, emailFormat, async (req, res, next) => {
+    // #swagger.tags = ['Auth']
+    // #swagger.description = "Login route, only 'login' and 'password' are needed in the request body."
+    // #swagger.responses[200] = { description: "Successful login" }
+
     const { login, password } = req.body;
 
     if (!login) {
@@ -80,6 +88,10 @@ router.post('/login', jsonParser, emailFormat, async (req, res, next) => {
 });
 
 router.post("/signup",jsonParser,emailFormat, async (req, res, next) => {
+        // #swagger.tags = ['Auth']
+        // #swagger.description = "sign up" 
+        // #swagger.responses = [200]
+    
 	const { firstname, lastname, username,email,password,address,tlfnumber } = req.body;
 	if (firstname == null&&lastname==null ) {
 	  return res.jsend.fail({ name: "Name is required." });
@@ -125,6 +137,9 @@ router.post("/signup",jsonParser,emailFormat, async (req, res, next) => {
   });
 
 router.post('/logout',(req,res)=>{
+        // #swagger.tags = ['Auth']
+        // #swagger.description = "logout routes, it will delete the JWT cookie" 
+        // #swagger.responses = [200]
     res.cookie('token','',{maxAge:0})
     res.jsend.success({message:"logged out"})
 })

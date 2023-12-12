@@ -13,6 +13,9 @@ var jsonParser=bodyParser.json()
 router.use(jsend.middleware)
 
 router.get('/', jsonParser, isAuthMember, async(req,res,next) => {
+        // #swagger.tags = ['User routes']
+        // #swagger.description = "Get orders for individual users" 
+        // #swagger.responses = [200]
     
     const userId= req.userData.id
    

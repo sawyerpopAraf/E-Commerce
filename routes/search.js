@@ -11,6 +11,9 @@ var jsonParser=bodyParser.json()
 router.use(jsend.middleware)
 
 router.post('/product',jsonParser,async(req,res,next)=>{
+        // #swagger.tags = ['Guest routes']
+        // #swagger.description = "Search by product name" 
+        // #swagger.responses = [200]
     const {product} =req.body
     if(product==null){
         return res.jsend.fail({result:"Plz provide product's name"})
@@ -26,6 +29,9 @@ router.post('/product',jsonParser,async(req,res,next)=>{
 })
 
 router.post('/brand',jsonParser,async(req,res,next)=>{
+        // #swagger.tags = ['Guest routes']
+        // #swagger.description = "Search by brand name" 
+        // #swagger.responses = [200]
     const {brand} =req.body
     if(brand==null){
         return res.jsend.fail({result:"Plz provide brand's name"})
@@ -40,6 +46,9 @@ router.post('/brand',jsonParser,async(req,res,next)=>{
 })
 
 router.post('/category',jsonParser,async(req,res,next)=>{
+     // #swagger.tags = ['Guest routes']
+        // #swagger.description = "Search by category name" 
+        // #swagger.responses = [200]
     const {category} =req.body
     if(category==null){
         return res.jsend.fail({result:"Plz provide category's name"})

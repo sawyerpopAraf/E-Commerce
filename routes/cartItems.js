@@ -12,6 +12,9 @@ var jsonParser=bodyParser.json()
 router.use(jsend.middleware)
 
 router.post('/add', jsonParser, isAuthMember, async(req,res,next) => {
+       // #swagger.tags = ['User routes']
+        // #swagger.description = "Add item to cart" 
+        // #swagger.responses = [200]
     const { productId,quantity} = req.body;
     const userId= req.userData.id
     if (!productId&&!quantity) {
@@ -29,6 +32,9 @@ router.post('/add', jsonParser, isAuthMember, async(req,res,next) => {
 });
 
 router.delete('/delete/:itemsId', jsonParser, isAuthMember, async(req,res,next) => {
+        // #swagger.tags = ['User routes']
+        // #swagger.description = "Delete an item from the cart; the result will depend on whether the cart has been checked out or not" 
+        // #swagger.responses = [200]
     const {cartId} = req.body;
     const userId= req.userData.id
     const itemsId=parseInt(req.params.itemsId)

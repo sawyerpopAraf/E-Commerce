@@ -8,6 +8,9 @@ var productService=new ProductService(db)
 router.use(jsend.middleware)
 
 router.get('/',async(req,res,next)=>{
+       // #swagger.tags = ['Guest routes']
+        // #swagger.description = "Get all products" 
+        // #swagger.responses = [200]
         try{
             const data = await productService.getProducts()
             return res.jsend.success({result:data})

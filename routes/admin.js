@@ -21,6 +21,11 @@ var jsonParser=bodyParser.json()
 router.use(jsend.middleware)
 
 router.get('/brands',jsonParser,isAuthAdmin,async(req,res,next)=>{
+     // #swagger.tags = ['AdminBrands']
+     // #swagger.description = "Gets the list of all available brands for Admin."
+     // #swagger.produces = ['text/html']
+      // #swagger.responses = [200]
+
     try{
       const brands = await brandService.getBrands()
       res.render('brands',{brands:brands})
@@ -30,6 +35,10 @@ router.get('/brands',jsonParser,isAuthAdmin,async(req,res,next)=>{
 })
 
 router.post('/addbrand', jsonParser, isAuthAdmin, async (req, res, next) => {
+       // #swagger.tags = ['AdminBrands']
+       // #swagger.description = "Add a brand to database"
+        // #swagger.responses = [200]
+       
     const { brandname } = req.body;
     if (!brandname) {
         return res.jsend.fail({ result: "Brand name needed" });
@@ -46,6 +55,9 @@ router.post('/addbrand', jsonParser, isAuthAdmin, async (req, res, next) => {
 });
 
 router.put('/updatebrand/:id',isAuthAdmin, async(req,res,next)=>{
+       // #swagger.tags = ['AdminBrands']
+       // #swagger.description = "update a brand"
+      // #swagger.responses = [200]
     const{newbrand}=req.body
     if(newbrand==null){
         return res.jsend.fail({result:"newbrand name needed"})
@@ -59,6 +71,9 @@ router.put('/updatebrand/:id',isAuthAdmin, async(req,res,next)=>{
 })
 
 router.delete('/deletebrand/:id',isAuthAdmin,async(req,res,next)=>{
+     // #swagger.tags = ['AdminBrands']
+       // #swagger.description = "delete a brand from database"
+        // #swagger.responses = [200]
     const {id}=req.params
     try{
         const data=await brandService.deleteBrand(id)
@@ -69,6 +84,10 @@ router.delete('/deletebrand/:id',isAuthAdmin,async(req,res,next)=>{
 })
 
 router.get('/category',jsonParser,isAuthAdmin,async(req,res,next)=>{
+      // #swagger.tags = ['AdminCategories']
+      // #swagger.description = "Gets the list of all available categories for Admin."
+      // #swagger.produces = ['text/html']
+      // #swagger.responses = [200]
     try{
       const categories = await categoryService.getCategories()
       res.render('category',{categories:categories})
@@ -78,6 +97,9 @@ router.get('/category',jsonParser,isAuthAdmin,async(req,res,next)=>{
 })
 
 router.post('/addcategory', jsonParser, isAuthAdmin, async(req,res,next) => {
+        // #swagger.tags = ['AdminCategories']
+        // #swagger.description = "Add a category"
+        // #swagger.responses = [200]
     const { categoryname } = req.body;
     if (!categoryname) {
         return res.jsend.fail({ result: "Category name needed" });
@@ -94,6 +116,9 @@ router.post('/addcategory', jsonParser, isAuthAdmin, async(req,res,next) => {
 });
 
 router.put('/updatecategory/:id',jsonParser,isAuthAdmin, async(req,res,next)=>{
+        // #swagger.tags = ['AdminCategories']
+        // #swagger.description = "Update a category"
+        // #swagger.responses = [200]
     const{newcategory}=req.body
     if(newcategory==null){
         return res.jsend.fail({result:"new category name needed"})
@@ -107,6 +132,9 @@ router.put('/updatecategory/:id',jsonParser,isAuthAdmin, async(req,res,next)=>{
 })
 
 router.delete('/category/:id',isAuthAdmin,async(req,res,next)=>{
+        // #swagger.tags = ['AdminCategories']
+        // #swagger.description = "Delete a category"
+        // #swagger.responses = [200]
     const {id}=req.params
     try{
         const data=await categoryService.deleteCategory(id)
@@ -117,6 +145,9 @@ router.delete('/category/:id',isAuthAdmin,async(req,res,next)=>{
 })
 
 router.post('/addproduct', jsonParser, isAuthAdmin, async(req,res,next) => {
+        // #swagger.tags = ['AdminProducts']
+        // #swagger.description = "Add a product"
+        // #swagger.responses = [200]
     const { name,price,description,imageUrl,quantity,brandId,categoryId } = req.body;
     if (name==null&&price==null&&description==null&&imageUrl==null&&quantity==null&&brandId==null&&categoryId==null) {
         return res.jsend.fail({ result: "please fill all the required fields" });
@@ -133,6 +164,10 @@ router.post('/addproduct', jsonParser, isAuthAdmin, async(req,res,next) => {
 });
 
 router.get('/products',jsonParser,isAuthAdmin,async(req,res,next)=>{
+     // #swagger.tags = ['AdminProducts']
+      // #swagger.description = "Gets the list of all available products for Admin."
+      // #swagger.produces = ['text/html']
+      // #swagger.responses = [200]
     try{
       const products = await productService.getProducts()
       const brands = await brandService.getBrands()
@@ -145,6 +180,9 @@ router.get('/products',jsonParser,isAuthAdmin,async(req,res,next)=>{
 })
 
 router.put('/updateproduct/:id',jsonParser,isAuthAdmin, async(req,res,next)=>{
+       // #swagger.tags = ['AdminProducts']
+       // #swagger.description = "update a product"
+       // #swagger.responses = [200]
     const {id}=req.params
 
     const { name,price,description,imageUrl,quantity,brandId,categoryId } = req.body;    
@@ -161,6 +199,9 @@ router.put('/updateproduct/:id',jsonParser,isAuthAdmin, async(req,res,next)=>{
 
 //soft delete product
 router.delete('/deleteproduct/:id',isAuthAdmin,async(req,res,next)=>{
+      // #swagger.tags = ['AdminProducts']
+       // #swagger.description = "delete a product,soft delete"
+      // #swagger.responses = [200]
     const {id}=req.params
     try{
         const data=await productService.deleteProduct(id)
@@ -172,6 +213,9 @@ router.delete('/deleteproduct/:id',isAuthAdmin,async(req,res,next)=>{
 
 //only for testing, this will delete the product from the database
 router.delete('/deletetest/:id',isAuthAdmin,async(req,res,next)=>{
+      // #swagger.tags = ['Testing-Product']
+       // #swagger.description = "delete a product,only for testing purpose"
+      // #swagger.responses = [200]
     const {id}=req.params
     try{
         const data=await productService.deleteTest(id)
@@ -183,6 +227,9 @@ router.delete('/deletetest/:id',isAuthAdmin,async(req,res,next)=>{
 
 
 router.put('/reactiveproduct/:id',isAuthAdmin,async(req,res,next)=>{
+      // #swagger.tags = ['AdminProducts']
+       // #swagger.description = "reactive a product"
+      // #swagger.responses = [200]
     const {id}=req.params
     try{
         const data=await productService.reactive(id)
@@ -193,6 +240,9 @@ router.put('/reactiveproduct/:id',isAuthAdmin,async(req,res,next)=>{
 })
 
 router.get('/ordersDetails',isAuthAdmin,async(req,res,next)=>{
+      // #swagger.tags = ['AdminOrders']
+       // #swagger.description = "get all orders and their details, like product name and purchased quantity"
+      // #swagger.responses = [200]
     try{
         const data=await orderService.orderDetailsAdmin()
         return res.jsend.success({result:data})
@@ -202,6 +252,9 @@ router.get('/ordersDetails',isAuthAdmin,async(req,res,next)=>{
 })
 
 router.put('/orderstatus/:id',jsonParser,isAuthAdmin,async(req,res,next)=>{
+      // #swagger.tags = ['AdminOrders']
+       // #swagger.description = "change the status of an order"
+      // #swagger.responses = [200]
      const id=parseInt(req.params.id)
      const {newStatus}=req.body
     try{
@@ -213,6 +266,9 @@ router.put('/orderstatus/:id',jsonParser,isAuthAdmin,async(req,res,next)=>{
 })
 
 router.get('/orders',isAuthAdmin,async(req,res,next)=>{
+      // #swagger.tags = ['AdminOrders']
+       // #swagger.description = "Get all orders, like status,membership, orderNumber,UserId"
+      // #swagger.responses = [200]
     try{
         const orders=await orderService.getOrdersFrontEnd()
         console.log(orders)
@@ -224,6 +280,10 @@ router.get('/orders',isAuthAdmin,async(req,res,next)=>{
 
 
 router.get('/users',isAuthAdmin,async(req,res,next)=>{
+     // #swagger.tags = ['AdminUsers']
+     // #swagger.description = "Gets the list of all available users for Admin."
+     // #swagger.produces = ['text/html']
+      // #swagger.responses = [200]
     try{
         const users= await userService.getUsers()
         res.render('users',{users,users})
@@ -233,6 +293,9 @@ router.get('/users',isAuthAdmin,async(req,res,next)=>{
 })
 
 router.put('/role/:id',isAuthAdmin,async(req,res,next)=>{
+     // #swagger.tags = ['AdminUsers']
+     // #swagger.description = "change user's role, Admin to User or vice versa"
+      // #swagger.responses = [200]
     const id=parseInt(req.params.id)
    try{
        const data=await userService.changeUserRole(id)
@@ -244,6 +307,9 @@ router.put('/role/:id',isAuthAdmin,async(req,res,next)=>{
 })
 
 router.delete('/users/:id',isAuthAdmin,async(req,res,next)=>{
+     // #swagger.tags = ['AdminUsers']
+     // #swagger.description = "soft delete a user."
+      // #swagger.responses = [200]
     const id=parseInt(req.params.id)
    try{
        const data=await userService.deleteUser(id)
@@ -255,6 +321,9 @@ router.delete('/users/:id',isAuthAdmin,async(req,res,next)=>{
 })
 
 router.put('/users/:id',isAuthAdmin,async(req,res,next)=>{
+     // #swagger.tags = ['AdminUsers']
+     // #swagger.description = "Reactive a user"
+      // #swagger.responses = [200]
     const id=parseInt(req.params.id)
    try{
        const data=await userService.reactiveUser(id)

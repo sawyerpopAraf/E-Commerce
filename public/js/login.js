@@ -20,9 +20,8 @@ $(document).ready(function() {
                 } else if (data.status == "success") {
                     if (data.data.role == "User") {
                         alert("You are not authorized to this page");
-                    } else if (data.data.role == "Admin") {
-                        // Token is now stored in an HTTP-only cookie, so we don't need to store it in localStorage.
-                        window.location.href = '/admin/products'; // Redirect if admin
+                    } else if (data.data.role == "Admin") {                     
+                        window.location.href = '/admin/products'; 
                     }
                 }
             },

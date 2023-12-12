@@ -8,6 +8,9 @@ var brandService=new BrandService(db)
 router.use(jsend.middleware)
 
 router.get('/',async(req,res,next)=>{
+        // #swagger.tags = ['Guest routes']
+        // #swagger.description = "Get all brands" 
+        // #swagger.responses = [200]
         try{
             const data = await brandService.getBrands()
             return res.jsend.success({result:data})

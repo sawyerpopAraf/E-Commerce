@@ -113,13 +113,7 @@ class CartItemsService{
             await transaction.rollback();
             throw error;
         }
-         
     }
-    
-    
-    
-    
-
 }
 
 module.exports=CartItemsService

@@ -11,16 +11,13 @@ function isAuthAdmin(req, res, next) {
     }
 
     try {
-       
-        const decodedToken = jwt.verify(token, process.env.TOKEN_SECRET);
+       const decodedToken = jwt.verify(token, process.env.TOKEN_SECRET);
         console.log("Decoded token:", decodedToken);
 
-        // Check if the role is Admin
+        // Check if the role is User
         if (decodedToken.role !== 'User') {
-            return res.status(403).json({ result: "Access denied. Not an admin." });
+            return res.status(403).json({ result: "Access denied. Not an user." });
         }
-
-        // If the user is an admin, attach the user data to the request and call next
         req.userData = decodedToken;
         next();
     } catch (err) {

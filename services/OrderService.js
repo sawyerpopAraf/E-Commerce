@@ -7,7 +7,6 @@ class OrderService{
         this.product=db.Product
        }
 
-
   async orderStatus(orderid,newStatus){
     const order=await this.order.findOne({where:{id:orderid}})
     if(!order){

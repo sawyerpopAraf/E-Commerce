@@ -61,9 +61,7 @@ class CartService{
               CartId: cartId,
               UserId: userId,
               orderNumber:this.randomNumber(8)
-
           }, { transaction });
-
 
           //update the membership and the totalPurchased 
           let TotalBoughtThisCart = cartItems.reduce((total, item) => total + item.quantity, 0);

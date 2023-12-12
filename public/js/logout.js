@@ -9,7 +9,6 @@ document.getElementById('logout').addEventListener('click', function(event) {
         if (data.status === 'success') {
             window.location.href = '/'; 
         } else {
-            // Handle the error
             console.error('Logout failed:', data.message);
         }
     })
