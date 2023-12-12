@@ -104,8 +104,16 @@ class ProductService{
             }
             product.deleted=true
             await product.save()
+            return product
         }
-        async reactive(id) {
+
+        //only for testing purpose
+    async deleteTest(id){
+        const product=await this.product.destroy({where:{id:id}})
+        return product
+    }
+        
+    async reactive(id) {
             const product = await this.product.findOne({
                 where: {
                     id: id

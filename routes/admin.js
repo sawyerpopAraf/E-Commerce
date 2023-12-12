@@ -159,6 +159,7 @@ router.put('/updateproduct/:id',jsonParser,isAuthAdmin, async(req,res,next)=>{
     }
 })
 
+//soft delete product
 router.delete('/deleteproduct/:id',isAuthAdmin,async(req,res,next)=>{
     const {id}=req.params
     try{
@@ -168,6 +169,18 @@ router.delete('/deleteproduct/:id',isAuthAdmin,async(req,res,next)=>{
         res.jsend.error({message: error.message})
     }
 })
+
+//only for testing, this will delete the product from the database
+router.delete('/deletetest/:id',isAuthAdmin,async(req,res,next)=>{
+    const {id}=req.params
+    try{
+        const data=await productService.deleteTest(id)
+        return res.jsend.success({result:data})
+    }catch(error){
+        res.jsend.error({message: error.message})
+    }
+})
+
 
 router.put('/reactiveproduct/:id',isAuthAdmin,async(req,res,next)=>{
     const {id}=req.params
