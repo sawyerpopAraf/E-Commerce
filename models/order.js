@@ -24,20 +24,6 @@ module.exports = (sequelize, DataTypes) => {
         Order.belongsTo(models.Cart);
         Order.hasMany(models.OrderDetails)
     };
-
-    Order.beforeCreate((order, options) => {
-        order.orderNumber = randomNumber(8);
-    });
-
-    function randomNumber(length) {
-        let result = '';
-        const characters = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789';
-        for (let i = 0; i < length; i++ ) {
-            result += characters.charAt(Math.floor(Math.random() * characters.length));
-        }
-        return result;
-    }
-
     return Order;
 };
 

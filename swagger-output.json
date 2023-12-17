@@ -833,7 +833,7 @@
         "tags": [
           "AdminUsers"
         ],
-        "description": "change user's role",
+        "description": "change user's role, Admin to User or vice versa",
         "parameters": [
           {
             "name": "id",

@@ -71,8 +71,7 @@ module.exports = (sequelize, Sequelize) => {
 	);
 	User.associate = function (models) {
 		User.hasMany(models.Order)
-		User.hasMany(models.Cart)
-    
+		User.hasMany(models.Cart)  
         }
 	
 	return User;
