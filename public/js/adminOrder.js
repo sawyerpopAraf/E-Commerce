@@ -21,7 +21,7 @@ document.querySelectorAll('.updateOrder').forEach(button=>{
         }).then((result)=>{
             if (result.isConfirmed) {
          
-                fetch('/admin/orderstatus/'+id, {
+                fetch('/admin/orders/orderstatus/'+id, {
                   method: 'PUT',
                   headers: {
                     'Content-Type': 'application/json',

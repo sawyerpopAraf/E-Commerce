@@ -1,4 +1,4 @@
-var express=require('express')
+/*var express=require('express')
 var router=express.Router()
 var isAuthAdmin=require('../middleware/isAuthAdmin')
 var jsend=require('jsend')
@@ -333,4 +333,4 @@ router.put('/users/:id',isAuthAdmin,async(req,res,next)=>{
        res.jsend.error({message: error.message})
    }
 })
-module.exports=router
+module.exports=router*/

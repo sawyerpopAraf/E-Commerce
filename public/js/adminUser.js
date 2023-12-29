@@ -11,7 +11,7 @@ document.querySelectorAll('.updateRole').forEach(button=>{
             cancelButtonText: "Cancel",
         }).then((result)=>{
             if (result.isConfirmed) {
-                fetch('/admin/role/'+id, {
+                fetch('/admin/users/role/'+id, {
                   method: 'PUT',
                   headers: {
                     'Content-Type': 'application/json',

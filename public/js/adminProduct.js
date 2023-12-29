@@ -31,7 +31,7 @@ document.getElementById('addProduct').addEventListener('click',function(){
       }).then((result) => {
         if (result.isConfirmed) {
          
-          fetch('/admin/addproduct', {
+          fetch('/admin/products/addproduct', {
             method: 'POST',
             headers: {
               'Content-Type': 'application/json',
@@ -90,7 +90,7 @@ document.querySelectorAll('.editProductBtn').forEach(button=>{
         }).then((result)=>{
             if (result.isConfirmed) {
          
-                fetch('/admin/updateproduct/'+productId, {
+                fetch('/admin/products/updateproduct/'+productId, {
                   method: 'PUT',
                   headers: {
                     'Content-Type': 'application/json',
@@ -131,7 +131,7 @@ document.querySelectorAll('.deleteProductBtn').forEach(button => {
       cancelButtonText: "Cancel"
     }).then((result) => {
       if (result.isConfirmed) {
-        fetch('/admin/deleteproduct/'+id, {  
+        fetch('/admin/products/deleteproduct/'+id, {  
           method:'DELETE',
           headers: {
             'Content-Type': 'application/json'
@@ -173,7 +173,7 @@ document.querySelectorAll('.reactiveProductBtn').forEach(button => {
       cancelButtonText: "Cancel"
     }).then((result) => {
       if (result.isConfirmed) {
-        fetch('/admin/reactiveproduct/'+id, {  
+        fetch('/admin/products/reactiveproduct/'+id, {  
           method:'PUT',
           headers: {
             'Content-Type': 'application/json'

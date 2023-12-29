@@ -1,8 +1,8 @@
 var express=require('express')
 var router=express.Router()
 var jsend=require('jsend')
-var db=require('../models')
-var SearchService=require('../services/SearchService')
+var db=require('../../models')
+var SearchService=require('../../services/SearchService')
 var searchService=new SearchService(db)
 var bodyParser=require('body-parser')
 

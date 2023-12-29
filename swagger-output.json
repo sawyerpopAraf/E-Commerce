@@ -276,249 +276,7 @@
         }
       }
     },
-    "/admin/brands": {
-      "get": {
-        "tags": [
-          "AdminBrands"
-        ],
-        "description": "Gets the list of all available brands for Admin.",
-        "produces": [
-          "text/html"
-        ],
-        "responses": {
-          "200": {
-            "description": "OK"
-          },
-          "401": {
-            "description": "Unauthorized"
-          },
-          "403": {
-            "description": "Forbidden"
-          }
-        }
-      }
-    },
-    "/admin/addbrand": {
-      "post": {
-        "tags": [
-          "AdminBrands"
-        ],
-        "description": "Add a brand to database",
-        "parameters": [
-          {
-            "name": "body",
-            "in": "body",
-            "schema": {
-              "type": "object",
-              "properties": {
-                "brandname": {
-                  "example": "any"
-                }
-              }
-            }
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "OK"
-          },
-          "401": {
-            "description": "Unauthorized"
-          },
-          "403": {
-            "description": "Forbidden"
-          }
-        }
-      }
-    },
-    "/admin/updatebrand/{id}": {
-      "put": {
-        "tags": [
-          "AdminBrands"
-        ],
-        "description": "update a brand",
-        "parameters": [
-          {
-            "name": "id",
-            "in": "path",
-            "required": true,
-            "type": "string"
-          },
-          {
-            "name": "body",
-            "in": "body",
-            "schema": {
-              "type": "object",
-              "properties": {
-                "newbrand": {
-                  "example": "any"
-                }
-              }
-            }
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "OK"
-          },
-          "401": {
-            "description": "Unauthorized"
-          },
-          "403": {
-            "description": "Forbidden"
-          }
-        }
-      }
-    },
-    "/admin/deletebrand/{id}": {
-      "delete": {
-        "tags": [
-          "AdminBrands"
-        ],
-        "description": "delete a brand from database",
-        "parameters": [
-          {
-            "name": "id",
-            "in": "path",
-            "required": true,
-            "type": "string"
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "OK"
-          },
-          "401": {
-            "description": "Unauthorized"
-          },
-          "403": {
-            "description": "Forbidden"
-          }
-        }
-      }
-    },
-    "/admin/category": {
-      "get": {
-        "tags": [
-          "AdminCategories"
-        ],
-        "description": "Gets the list of all available categories for Admin.",
-        "produces": [
-          "text/html"
-        ],
-        "responses": {
-          "200": {
-            "description": "OK"
-          },
-          "401": {
-            "description": "Unauthorized"
-          },
-          "403": {
-            "description": "Forbidden"
-          }
-        }
-      }
-    },
-    "/admin/addcategory": {
-      "post": {
-        "tags": [
-          "AdminCategories"
-        ],
-        "description": "Add a category",
-        "parameters": [
-          {
-            "name": "body",
-            "in": "body",
-            "schema": {
-              "type": "object",
-              "properties": {
-                "categoryname": {
-                  "example": "any"
-                }
-              }
-            }
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "OK"
-          },
-          "401": {
-            "description": "Unauthorized"
-          },
-          "403": {
-            "description": "Forbidden"
-          }
-        }
-      }
-    },
-    "/admin/updatecategory/{id}": {
-      "put": {
-        "tags": [
-          "AdminCategories"
-        ],
-        "description": "Update a category",
-        "parameters": [
-          {
-            "name": "id",
-            "in": "path",
-            "required": true,
-            "type": "string"
-          },
-          {
-            "name": "body",
-            "in": "body",
-            "schema": {
-              "type": "object",
-              "properties": {
-                "newcategory": {
-                  "example": "any"
-                }
-              }
-            }
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "OK"
-          },
-          "401": {
-            "description": "Unauthorized"
-          },
-          "403": {
-            "description": "Forbidden"
-          }
-        }
-      }
-    },
-    "/admin/category/{id}": {
-      "delete": {
-        "tags": [
-          "AdminCategories"
-        ],
-        "description": "Delete a category",
-        "parameters": [
-          {
-            "name": "id",
-            "in": "path",
-            "required": true,
-            "type": "string"
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "OK"
-          },
-          "401": {
-            "description": "Unauthorized"
-          },
-          "403": {
-            "description": "Forbidden"
-          }
-        }
-      }
-    },
-    "/admin/addproduct": {
+    "/admin/products/addproduct": {
       "post": {
         "tags": [
           "AdminProducts"
@@ -569,7 +327,7 @@
         }
       }
     },
-    "/admin/products": {
+    "/admin/products/": {
       "get": {
         "tags": [
           "AdminProducts"
@@ -591,7 +349,7 @@
         }
       }
     },
-    "/admin/updateproduct/{id}": {
+    "/admin/products/updateproduct/{id}": {
       "put": {
         "tags": [
           "AdminProducts"
@@ -648,7 +406,7 @@
         }
       }
     },
-    "/admin/deleteproduct/{id}": {
+    "/admin/products/deleteproduct/{id}": {
       "delete": {
         "tags": [
           "AdminProducts"
@@ -675,7 +433,7 @@
         }
       }
     },
-    "/admin/deletetest/{id}": {
+    "/admin/products/deletetest/{id}": {
       "delete": {
         "tags": [
           "Testing-Product"
@@ -702,7 +460,7 @@
         }
       }
     },
-    "/admin/reactiveproduct/{id}": {
+    "/admin/products/reactiveproduct/{id}": {
       "put": {
         "tags": [
           "AdminProducts"
@@ -729,7 +487,249 @@
         }
       }
     },
-    "/admin/ordersDetails": {
+    "/admin/brands/": {
+      "get": {
+        "tags": [
+          "AdminBrands"
+        ],
+        "description": "Gets the list of all available brands for Admin.",
+        "produces": [
+          "text/html"
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          },
+          "401": {
+            "description": "Unauthorized"
+          },
+          "403": {
+            "description": "Forbidden"
+          }
+        }
+      }
+    },
+    "/admin/brands/addbrand": {
+      "post": {
+        "tags": [
+          "AdminBrands"
+        ],
+        "description": "Add a brand to database",
+        "parameters": [
+          {
+            "name": "body",
+            "in": "body",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "brandname": {
+                  "example": "any"
+                }
+              }
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          },
+          "401": {
+            "description": "Unauthorized"
+          },
+          "403": {
+            "description": "Forbidden"
+          }
+        }
+      }
+    },
+    "/admin/brands/updatebrand/{id}": {
+      "put": {
+        "tags": [
+          "AdminBrands"
+        ],
+        "description": "update a brand",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "body",
+            "in": "body",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "newbrand": {
+                  "example": "any"
+                }
+              }
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          },
+          "401": {
+            "description": "Unauthorized"
+          },
+          "403": {
+            "description": "Forbidden"
+          }
+        }
+      }
+    },
+    "/admin/brands/deletebrand/{id}": {
+      "delete": {
+        "tags": [
+          "AdminBrands"
+        ],
+        "description": "delete a brand from database",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          },
+          "401": {
+            "description": "Unauthorized"
+          },
+          "403": {
+            "description": "Forbidden"
+          }
+        }
+      }
+    },
+    "/admin/categories/": {
+      "get": {
+        "tags": [
+          "AdminCategories"
+        ],
+        "description": "Gets the list of all available categories for Admin.",
+        "produces": [
+          "text/html"
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          },
+          "401": {
+            "description": "Unauthorized"
+          },
+          "403": {
+            "description": "Forbidden"
+          }
+        }
+      }
+    },
+    "/admin/categories/addcategory": {
+      "post": {
+        "tags": [
+          "AdminCategories"
+        ],
+        "description": "Add a category",
+        "parameters": [
+          {
+            "name": "body",
+            "in": "body",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "categoryname": {
+                  "example": "any"
+                }
+              }
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          },
+          "401": {
+            "description": "Unauthorized"
+          },
+          "403": {
+            "description": "Forbidden"
+          }
+        }
+      }
+    },
+    "/admin/categories/updatecategory/{id}": {
+      "put": {
+        "tags": [
+          "AdminCategories"
+        ],
+        "description": "Update a category",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "body",
+            "in": "body",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "newcategory": {
+                  "example": "any"
+                }
+              }
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          },
+          "401": {
+            "description": "Unauthorized"
+          },
+          "403": {
+            "description": "Forbidden"
+          }
+        }
+      }
+    },
+    "/admin/categories/category/{id}": {
+      "delete": {
+        "tags": [
+          "AdminCategories"
+        ],
+        "description": "Delete a category",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          },
+          "401": {
+            "description": "Unauthorized"
+          },
+          "403": {
+            "description": "Forbidden"
+          }
+        }
+      }
+    },
+    "/admin/orders/ordersDetails": {
       "get": {
         "tags": [
           "AdminOrders"
@@ -748,7 +748,7 @@
         }
       }
     },
-    "/admin/orderstatus/{id}": {
+    "/admin/orders/orderstatus/{id}": {
       "put": {
         "tags": [
           "AdminOrders"
@@ -787,7 +787,7 @@
         }
       }
     },
-    "/admin/orders": {
+    "/admin/orders/": {
       "get": {
         "tags": [
           "AdminOrders"
@@ -806,7 +806,7 @@
         }
       }
     },
-    "/admin/users": {
+    "/admin/users/": {
       "get": {
         "tags": [
           "AdminUsers"
@@ -828,7 +828,7 @@
         }
       }
     },
-    "/admin/role/{id}": {
+    "/admin/users/role/{id}": {
       "put": {
         "tags": [
           "AdminUsers"
@@ -907,7 +907,34 @@
         }
       }
     },
-    "/item/add": {
+    "/admin/cart/checkout/{cartId}": {
+      "post": {
+        "tags": [
+          "User routes"
+        ],
+        "description": "check out cart for individual user",
+        "parameters": [
+          {
+            "name": "cartId",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          },
+          "401": {
+            "description": "Unauthorized"
+          },
+          "403": {
+            "description": "Forbidden"
+          }
+        }
+      }
+    },
+    "/admin/cartitems/add": {
       "post": {
         "tags": [
           "User routes"
@@ -943,7 +970,7 @@
         }
       }
     },
-    "/item/delete/{itemsId}": {
+    "/admin/cartitems/delete/{itemsId}": {
       "delete": {
         "tags": [
           "User routes"
@@ -982,34 +1009,7 @@
         }
       }
     },
-    "/cart/checkout/{cartId}": {
-      "post": {
-        "tags": [
-          "User routes"
-        ],
-        "description": "check out cart for individual user",
-        "parameters": [
-          {
-            "name": "cartId",
-            "in": "path",
-            "required": true,
-            "type": "string"
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "OK"
-          },
-          "401": {
-            "description": "Unauthorized"
-          },
-          "403": {
-            "description": "Forbidden"
-          }
-        }
-      }
-    },
-    "/order/": {
+    "/admin/order/": {
       "get": {
         "tags": [
           "User routes"

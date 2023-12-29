@@ -18,7 +18,7 @@ document.getElementById('addCategory').addEventListener('click',function(){
       }).then((result) => {
         if (result.isConfirmed) {
          
-          fetch('/admin/addcategory', {
+          fetch('/admin/categories/addcategory', {
             method: 'POST',
             headers: {
               'Content-Type': 'application/json',
@@ -63,7 +63,7 @@ document.querySelectorAll('.updateCategoryBtn').forEach(button=>{
         }).then((result)=>{
             if (result.isConfirmed) {
          
-                fetch('/admin/updatecategory/'+id, {
+                fetch('/admin/categories/updatecategory/'+id, {
                   method: 'PUT',
                   headers: {
                     'Content-Type': 'application/json',
@@ -101,7 +101,7 @@ document.querySelectorAll('.deleteCategoryBtn').forEach(button => {
         cancelButtonText: "Cancel"
       }).then((result) => {
         if (result.isConfirmed) {
-          fetch('/admin/category/'+id, {  
+          fetch('/admin/categories/category/'+id, {  
             method:'DELETE',
             headers: {
               'Content-Type': 'application/json'

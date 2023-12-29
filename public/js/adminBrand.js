@@ -18,7 +18,7 @@ document.getElementById('addBrand').addEventListener('click',function(){
       }).then((result) => {
         if (result.isConfirmed) {
          
-          fetch('/admin/addbrand', {
+          fetch('/admin/brands/addbrand', {
             method: 'POST',
             headers: {
               'Content-Type': 'application/json',
@@ -66,7 +66,7 @@ document.querySelectorAll('.updateBrandBtn').forEach(button=>{
         }).then((result)=>{
             if (result.isConfirmed) {
          
-                fetch('/admin/updatebrand/'+id, {
+                fetch('/admin/brands/updatebrand/'+id, {
                   method: 'PUT',
                   headers: {
                     'Content-Type': 'application/json',
@@ -104,7 +104,7 @@ document.querySelectorAll('.deleteBrandBtn').forEach(button => {
         cancelButtonText: "Cancel"
       }).then((result) => {
         if (result.isConfirmed) {
-          fetch('/admin/deletebrand/'+id, {  
+          fetch('/admin/brands/deletebrand/'+id, {  
             method:'DELETE',
             headers: {
               'Content-Type': 'application/json'

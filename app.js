@@ -15,14 +15,25 @@ db.sequelize.sync({force:false})
 var indexRouter = require('./routes/index');
 var initRouter=require('./routes/initData')
 var authRouter=require('./routes/auth')
-var categoryRouter=require('./routes/category')
-var brandRouter=require('./routes/brand')
-var productRouter=require('./routes/product')
-var searchRouter=require('./routes/search')
-var adminRouter=require('./routes/admin')
-var cartItems=require('./routes/cartItems')
-var cartRouter=require('./routes/cart')
-var orderRouter=require('./routes/order')
+
+//guest 
+var categoryRouter=require('./routes/guest/category')
+var brandRouter=require('./routes/guest/brand')
+var productRouter=require('./routes/guest/product')
+var searchRouter=require('./routes/guest/search')
+
+//admin
+var adminBrandsRouter=require('./routes/admin/brands')
+var adminCategoriesRouter=require('./routes/admin/categories')
+var adminOrdersRouter=require('./routes/admin/orders')
+var adminProductsRouter=require('./routes/admin/products')
+var adminUsersRouter=require('./routes/admin/users')
+
+//user
+var userCartRouter=require('./routes/user/cart')
+var userCartItemsRouter=require('./routes/user/cartItems')
+var userOrderRouter=require('./routes/user/order')
+
 
 var app = express();
 
@@ -36,6 +47,7 @@ app.use(express.urlencoded({ extended: false }));
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
 
+//guest
 app.use('/', indexRouter);
 app.use('/init', initRouter);
 app.use('/', authRouter);
@@ -43,10 +55,19 @@ app.use('/category', categoryRouter);
 app.use('/brand', brandRouter);
 app.use('/product', productRouter);
 app.use('/search', searchRouter);
-app.use('/admin', adminRouter);
-app.use('/item', cartItems);
-app.use('/cart', cartRouter);
-app.use('/order', orderRouter);
+
+//admin
+app.use('/admin/products', adminProductsRouter);
+app.use('/admin/brands', adminBrandsRouter);
+app.use('/admin/categories', adminCategoriesRouter);
+app.use('/admin/orders', adminOrdersRouter);
+app.use('/admin/users', adminUsersRouter);
+
+//user
+app.use('/admin/cart', userCartRouter);
+app.use('/admin/cartitems', userCartItemsRouter);
+app.use('/admin/order', userOrderRouter);
+
 
 app.use(bodyParser.json())
 app.use('/doc', swaggerUi.serve, swaggerUi.setup(swaggerFile))

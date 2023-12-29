@@ -93,7 +93,7 @@ class CartService{
           throw error;
       }
   }
-  
+
    randomNumber(length) {
     let result = '';
     const characters = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789';

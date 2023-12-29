@@ -1,9 +1,9 @@
 var express=require('express')
 var router=express.Router()
-var isAuthMember=require('../middleware/isAuthMember')
+var isAuthMember=require('../../middleware/isAuthMember')
 var jsend=require('jsend')
-var db=require('../models')
-var CartItemsService=require('../services/CartItemsService')
+var db=require('../../models')
+var CartItemsService=require('../../services/CartItemsService')
 var cartItemService=new CartItemsService(db)
 
 var bodyParser=require('body-parser')
