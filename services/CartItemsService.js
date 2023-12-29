@@ -93,6 +93,7 @@ class CartItemsService{
                 if (itemDetails) {
                     itemDetails.deleted = true;
                     await itemDetails.save({ transaction });
+                    // add codes depends on the return policy. 
                 }
             } else {
                 // delete before checkout
