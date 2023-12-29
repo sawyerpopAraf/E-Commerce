@@ -1,5 +1,5 @@
 E-commerce Application
-Introduction
+Introduction:
 This E-commerce application is focused on backend functionality. Initially, you will need to populate data using the API, and ensure you include the admin's password when sending requests due to security reasons. An admin interface with comprehensive CRUD functionalities is provided. For a detailed view of the API endpoints and functionalities, check the Swagger documentation at (localhost:3000/doc).
 
 Features
