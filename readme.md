@@ -13,6 +13,12 @@ Checkout: Users can proceed to checkout, transforming their cart into an order w
 Order Tracking: Users can view the status of their orders.
 Delete Cart Items: Once a cart is checked out, the cart items from that cart cannot be removed. Thus, a soft delete can be used.
 
+Add Item to Cart and Checkout:
+Only a registered user can add an item to the cart. Once the cart is checked out, it will immediately become an order, and no item from that cart can be deleted—only soft deleted.
+
+Membership:
+There are three different levels of membership: Bronze (no discount), Silver (15% discount if your total purchase exceeds 15), and Gold (30% discount if total purchase exceeds 30)
+
 Admin
 Product Management: Create, read, update, and perform soft deletes on products in the catalog.
 Brand Management: Manage all product brands, including creating new brands and editing existing ones.
