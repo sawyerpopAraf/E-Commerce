@@ -11,7 +11,7 @@ describe('testing--login--crud', () => {
   //const timestamp = new Date().getTime()
   
   test('POST /login - success', async () => {
-    const credentials = { login: 'admin@noroff.no', password: 'P@ssword2023' };
+    const credentials = { login: 'admin@noroff.no', password: 'P@ssword2023'};
     const response = await request(URL).post('/login').send(credentials);
 
     expect(response.body).toHaveProperty('data');

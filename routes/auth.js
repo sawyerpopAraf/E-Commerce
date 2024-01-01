@@ -87,18 +87,25 @@ router.post('/login', jsonParser, emailFormat, async (req, res, next) => {
     }
 });
 
-router.post("/signup",jsonParser,emailFormat, async (req, res, next) => {
+router.post("/signup",jsonParser,async (req, res, next) => {
         // #swagger.tags = ['Auth']
         // #swagger.description = "sign up" 
         // #swagger.responses = [200]
     
 	const { firstname, lastname, username,email,password,address,tlfnumber } = req.body;
+    const regex = /^[a-zA-Z0-9._-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/;
+
 	if (firstname == null&&lastname==null ) {
 	  return res.jsend.fail({ name: "Name is required." });
 	}
 	if (!email) {
 	  return res.jsend.fail({ email: "Email is required." });
 	}
+    const validEmail=regex.test(email)
+    
+    if(!validEmail){
+        return res.jsend.fail({message:"Invalid email"})
+    }
 	if (!password) {
 	  return res.jsend.fail({ password: "Password is required." });
 	}
